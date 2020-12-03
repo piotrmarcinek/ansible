@@ -1,5 +1,5 @@
 - name: Download update file
-  hosts: 0256-t04
+  hosts: all
   tasks:
     - name: Download cups config
       get_url:
