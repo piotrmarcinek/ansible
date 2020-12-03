@@ -1,4 +1,5 @@
 - name: Download cups config
+  hosts: 0256-t04
   get_url:
     url: http://repo/repo/cups.tar.gz
     dest: /tmp/cups.tar.gz
@@ -6,6 +7,7 @@
     mode: '0660'
 
 - name: Download firefox start script
+  hosts: 0256-t04
   get_url:
     url: http://repo/repo/firefox-start.sh
     dest: /tmp/firefox-start.sh
