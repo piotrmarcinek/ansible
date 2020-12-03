@@ -1,12 +1,12 @@
 - name: Download update file
   hosts: 0256-t04
   tasks:
-    -name: Download cups config
-     get_url:
-      url: http://repo/repo/cups.tar.gz
-      dest: /tmp/cups.tar.gz
-      checksum: 09fd784cc4814faa7569548e88d199a8a71d8ddcb05c2f23ee1e82bd975c46cd
-      mode: '0660'
+    - name: Download cups config
+      get_url:
+        url: http://repo/repo/cups.tar.gz
+        dest: /tmp/cups.tar.gz
+        checksum: 09fd784cc4814faa7569548e88d199a8a71d8ddcb05c2f23ee1e82bd975c46cd
+        mode: '0660'
 
     - name: Download firefox start script
       get_url:
