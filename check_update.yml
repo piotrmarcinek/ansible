@@ -10,7 +10,7 @@
         url: https://10.17.11.11:443/api/v2/job_templates/18/callback/
         method: POST
         body: host_config_key=bce91c33-bf03-4033-9f64-ac162f6babb8
-        body-format: form-urlencoded
+        body_format: form-urlencoded
         validate_certs: no
       when: ansible_local.version.os_ver == "5" and ansible_local.version.os_subver == "2"
       
