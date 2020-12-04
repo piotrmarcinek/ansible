@@ -6,7 +6,7 @@
       when: ansible_local.version.os_ver == "5" and ansible_local.version.os_subver == "1"
     
     - name: Callback valid playbook for 5.2
-      shell: 'curl -k -XPOST --data "host_config_key=bce91c33-bf03-4033-9f64-ac162f6babb8" https://10.17.11.11:443/api/v2/job_templates/17/callback/'
+      shell: 'curl -k -XPOST --data "host_config_key=bce91c33-bf03-4033-9f64-ac162f6babb8" https://10.17.11.11:443/api/v2/job_templates/18/callback/'
       when: ansible_local.version.os_ver == "5" and ansible_local.version.os_subver == "2"
       
     - name: Callback valid playbook 5.3
