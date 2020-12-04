@@ -1,0 +1,15 @@
+- name: Check update
+  hosts: all
+  tasks:
+    - name: Callback valid playbook
+      shell: touch /tmp/test5-1
+      when: ansible_local.version.os_ver == "5" and ansible_local.version.os_subver == "1"
+    
+    - name: Callback valid playbook
+      shell: touch /tmp/test5-2
+      when: ansible_local.version.os_ver == "5" and ansible_local.version.os_subver == "2"
+ 
+    - name: Callback valid playbook
+      shell: touch /tmp/test5-3
+      when: ansible_local.version.os_ver == "5" and ansible_local.version.os_subver == "3"
+    
