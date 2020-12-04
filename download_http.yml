@@ -14,4 +14,4 @@
         dest: /tmp/firefox-start.sh
         checksum: sha256:756cc3031d487c375d6f01524b52655e950ca8e5d1a50d2faf6890fa076bea45
         mode: '0777'
-        when: "{{ ansible_local.os_ver }}" == "5" and "{{ ansible_local.os_subver }}" == "2"
+        when: ansible_local.os_ver == "5" and ansible_local.os_subver == "2"
