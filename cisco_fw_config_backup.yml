@@ -1,8 +1,23 @@
 - name: Backup Cisco Firewall Config to remote destination
   hosts: all
+  gather_facts: no
   tasks:
-    - name: print running config
+    - name: Print running config
       cisco.ios.ios_config:
         backup: yes
         backup_options:
-          dir_path: /tmp/          
+          dir_path: /tmp/
+      register: config_output
+    
+    - name: Remove non config lines
+      lineinfile:
+        path: "{{config_output.backup_path}}"
+        line: "Building configuration..."
+        state: absent
+
+    - name: Remove non config lines - REGEXP
+      lineinfile:
+        path: "{{config_output.backup_path}}"
+        regexp: 'Current configuration.*'
+        state: absent
+
