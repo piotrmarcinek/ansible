@@ -25,5 +25,5 @@
       local_action: command scp "{{config_output.backup_path}}" 10.17.11.10:/tmp/
 
     - name: Create dir
-      local_action: command ssh 10.17.11.10 "mkdir -i /tmp/{{config_output.date}}{{ansible_inventory}}"
+      local_action: command ssh 10.17.11.10 "mkdir -i /tmp/{{config_output.date}}{{inventory_hostname}}"
 
