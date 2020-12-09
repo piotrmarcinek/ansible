@@ -28,4 +28,6 @@
       local_action: command scp {{config_output.backup_path}} 10.17.11.10:/tmp/{{config_output.date}}/{{inventory_hostname}}
     
     - name: Remove local file
-      local_action: command rm -f {{config_output.backup_path}}
+      file: 
+        src: "{{config_output.backup_path}}"
+        state: absent
