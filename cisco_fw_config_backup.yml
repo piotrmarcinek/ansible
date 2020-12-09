@@ -20,10 +20,12 @@
         path: "{{config_output.backup_path}}"
         regexp: 'Current configuration.*'
         state: absent
-        
-    - name: Move file to remote dir
-      local_action: command scp "{{config_output.backup_path}}" 10.17.11.10:/tmp/
 
     - name: Create dir
-      local_action: command ssh 10.17.11.10 "mkdir -p /tmp/{{config_output.date}}{{inventory_hostname}}"
-
+      local_action: command ssh 10.17.11.10 "mkdir -p /tmp/{{config_output.date}}/{{inventory_hostname}}"
+              
+    - name: Move file to remote dir
+      local_action: command scp {{config_output.backup_path}} 10.17.11.10:/tmp/{{config_output.date}}/{{inventory_hostname}}
+    
+    - name: Remove local file
+      local_action: command rm -f {{config_output.backup_path}}
