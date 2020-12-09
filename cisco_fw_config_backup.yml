@@ -29,5 +29,5 @@
     
     - name: Remove local file
       file: 
-        src: "{{config_output.backup_path}}"
+        path: "{{config_output.backup_path}}"
         state: absent
