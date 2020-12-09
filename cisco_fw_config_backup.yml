@@ -20,4 +20,7 @@
         path: "{{config_output.backup_path}}"
         regexp: 'Current configuration.*'
         state: absent
+        
+    - name: Move file to remote dir
+      local_action: command touch /tmp/testarfsf
 
