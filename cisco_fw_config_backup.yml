@@ -22,5 +22,4 @@
         state: absent
         
     - name: Move file to remote dir
-      local_action: command touch /tmp/testarfsf
-
+      local_action: command scp "{{config_output.backup_path}}" 10.17.11.10:/tmp/
