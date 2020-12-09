@@ -4,5 +4,5 @@
     - name: print running config
       cisco.ios.ios_config:
         backup: yes
-        - backup_options:
+        backup_options:
           dir_path: /tmp/          
