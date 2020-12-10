@@ -1,6 +1,7 @@
 - name: Backup Cisco Firewall Config to remote destination
   hosts: all
   gather_facts: no
+  ignore_unreachable: yes
   tasks:
     - name: Print running config
       cisco.ios.ios_config:
