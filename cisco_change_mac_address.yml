@@ -1,9 +1,11 @@
 - name: Cahnge MAC address on DHCP pool
   hosts: all
+  gather_facts: no
   tasks:
     - name: Delete MAC address
       cisco.ios.ios_command:
         commands: 
         - conf t
-        - ip dhcp pool DHCP_TZONE_T1
+        - ip dhcp pool {{terminal_pool}}
         - no hardware-address
+        - hardware-address 0001.2e81.e89d
