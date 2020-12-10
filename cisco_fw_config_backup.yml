@@ -1,7 +1,7 @@
 - name: Backup Cisco Firewall Config to remote destination
   hosts: all
   ignore_unreachable: yes
-  ignore_errors: yes
+  max_fail_percentage: 70
   gather_facts: no
   tasks:
     - name: Print running config
