@@ -4,6 +4,7 @@
   ignore_unreachable: yes
   tasks:
     - name: Print running config
+      ignore_unreachable: yes
       cisco.ios.ios_config:
         backup: yes
         backup_options:
