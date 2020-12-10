@@ -8,4 +8,4 @@
         - conf t
         - ip dhcp pool {{terminal_pool}}
         - no hardware-address
-        - hardware-address 0001.2e81.e89d
+        - hardware-address {{hardware_address}}
