@@ -3,4 +3,7 @@
   tasks:
     - name: Delete MAC address
       cisco.ios.ios_command:
-        commands: show version
+        commands: 
+        - conf t
+        - ip dhcp pool DHCP_TZONE_T1
+        - no hardware-address
