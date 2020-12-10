@@ -8,4 +8,4 @@
         - conf t
         - ip dhcp pool DHCP_TZONE_T{{terminal_pool}}
         - no hardware-address
-        - hardware-address {{hardware_address}}
+        - hardware-address {{hardware_address | replace('.','') | replace(':','') }}
