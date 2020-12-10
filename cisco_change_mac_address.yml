@@ -1,5 +1,5 @@
 - name: Cahnge MAC address on DHCP pool
-  hosts: "{{cisco_firewall}}"-fw
+  hosts: "{{cisco_firewall}}-fw"
   gather_facts: no
   tasks:
     - name: Delete MAC address
