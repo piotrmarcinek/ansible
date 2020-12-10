@@ -6,6 +6,6 @@
       cisco.ios.ios_command:
         commands: 
         - conf t
-        - ip dhcp pool {{terminal_pool}}
+        - ip dhcp pool DHCP_TZONE_T{{terminal_pool}}
         - no hardware-address
         - hardware-address {{hardware_address}}
