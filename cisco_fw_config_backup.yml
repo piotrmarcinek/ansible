@@ -1,5 +1,21 @@
-- name: Backup Cisco Firewall Config to remote destination
+- name: identify reachable hosts
   hosts: all
+  gather_facts: false
+  ignore_errors: true
+  ignore_unreachable: true
+  tasks:
+    - block:
+        - name: determine hosts that are up
+          wait_for_connection:
+            timeout: 5
+        - name: add devices with connectivity to the "running_hosts" group
+          group_by:
+            key: "running_hosts"
+      rescue:
+        - debug: msg="cannot connect to {{inventory_hostname}}"
+
+- name: Backup Cisco Firewall Config to remote destination
+  hosts: running_hosts
   ignore_unreachable: yes
   max_fail_percentage: 70
   gather_facts: no
