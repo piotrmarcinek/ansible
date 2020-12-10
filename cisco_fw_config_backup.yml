@@ -4,32 +4,36 @@
   max_fail_percentage: 70
   gather_facts: no
   tasks:
-    - name: Print running config
-      cisco.ios.ios_config:
-        backup: yes
-        backup_options:
-          dir_path: /tmp/
-      register: config_output
+    - name: Handle unreacahble hosts
+      block:
+        - name: Print running config
+          cisco.ios.ios_config:
+            backup: yes
+            backup_options:
+              dir_path: /tmp/
+          register: config_output
     
-    - name: Remove non config lines
-      lineinfile:
-        path: "{{config_output.backup_path}}"
-        line: "Building configuration..."
-        state: absent
+        - name: Remove non config lines
+          lineinfile:
+            path: "{{config_output.backup_path}}"
+            line: "Building configuration..."
+            state: absent
 
-    - name: Remove non config lines - REGEXP
-      lineinfile:
-        path: "{{config_output.backup_path}}"
-        regexp: 'Current configuration.*'
-        state: absent
+        - name: Remove non config lines - REGEXP
+          lineinfile:
+            path: "{{config_output.backup_path}}"
+            regexp: 'Current configuration.*'
+            state: absent
 
-    - name: Create dir
-      local_action: command ssh 10.17.11.10 "if [ ! -d /tmp/{{config_output.date}}/{{inventory_hostname}} ]; then mkdir -p /tmp/{{config_output.date}}/{{inventory_hostname}}; fi"
+        - name: Create dir
+          local_action: command ssh 10.17.11.10 "if [ ! -d /tmp/{{config_output.date}}/{{inventory_hostname}} ]; then mkdir -p /tmp/{{config_output.date}}/{{inventory_hostname}}; fi"
               
-    - name: Move file to remote dir
-      local_action: command scp {{config_output.backup_path}} 10.17.11.10:/tmp/{{config_output.date}}/{{inventory_hostname}}
+        - name: Move file to remote dir
+          local_action: command scp {{config_output.backup_path}} 10.17.11.10:/tmp/{{config_output.date}}/{{inventory_hostname}}
     
-    - name: Remove local file
-      file: 
-        path: "{{config_output.backup_path}}"
-        state: absent
+        - name: Remove local file
+          file: 
+            path: "{{config_output.backup_path}}"
+            state: absent
+      rescue: 
+        - debug: msg="cannot connect to {{inventory_hostname}}"
