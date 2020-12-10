@@ -1,6 +1,6 @@
-- name: run show version on remote devices
+- name: Cahnge MAC address on DHCP pool
   hosts: all
   tasks:
-    - name: show version
+    - name: Delete MAC address
       cisco.ios.ios_command:
         commands: show version
