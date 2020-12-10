@@ -6,9 +6,9 @@
   tasks:
     - name: Print running config
       cisco.ios.ios_config:
-      backup: yes
-      backup_options:
-        dir_path: /tmp/
+        backup: yes
+        backup_options:
+          dir_path: /tmp/
       register: config_output
     
     - name: Remove non config lines
