@@ -4,7 +4,6 @@
   max_fail_percentage: 70
   gather_facts: no
   tasks:
-  block:
     - name: Print running config
       cisco.ios.ios_config:
       backup: yes
@@ -34,5 +33,3 @@
       file: 
         path: "{{config_output.backup_path}}"
         state: absent
-    rescue:
-      - debug: msg="cannot connect to {{inventory_hostname}}"
