@@ -15,4 +15,4 @@
       register: output
     - name: Print output
       debug:
-        var: output | ansible.netcommon.ipaddr
+        var: {{ output | ansible.netcommon.ipaddr }}
