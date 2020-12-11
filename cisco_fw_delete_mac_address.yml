@@ -16,7 +16,7 @@
    
     - name: Extract IP address
       set_fact:
-        pool_ip: "{{ output.stdout[-1] }}"
+        pool_ip: "{{ output.stdout }}"
    
     - name: Print output
       debug:
