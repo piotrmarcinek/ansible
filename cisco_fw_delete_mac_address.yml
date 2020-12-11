@@ -16,7 +16,7 @@
    
     - name: Extract IP address
       set_fact:
-        pool_ip: "{{ output.stdout[-1] |  | replace('\n', '') | regex_replace('.*(TZONE).*', '\\1') }}"
+        pool_ip: "{{ output.stdout[-1] | replace('\n', '') | regex_replace('.*(TZONE).*', '\\1') }}"
    
     - name: Print output
       debug:
