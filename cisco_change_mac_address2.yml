@@ -8,3 +8,5 @@
         - no hardware-address
         - hardware-address {{hardware_address | replace('.','') | replace(':','') }}
         parents: ip dhcp pool DHCP_TZONE_T{{terminal_pool}}
+        save_when: always
+        match: exact
