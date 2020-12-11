@@ -1,0 +1,10 @@
+- name: Change MAC address on DHCP pool
+  hosts: "{{cisco_firewall}}-fw"
+  gather_facts: no
+  tasks:
+    - name: Execute commands
+      cisco.ios.ios_config:
+        lines:
+        - no hardware-address
+        - hardware-address {{hardware_address | replace('.','') | replace(':','') }}
+        parents: ip dhcp pool DHCP_TZONE_T{{terminal_pool}}
