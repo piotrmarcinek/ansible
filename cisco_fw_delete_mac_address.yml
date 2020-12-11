@@ -20,4 +20,4 @@
    
     - name: Print output
       debug:
-        var: pool_ip
+        msg: "{{ pool_ip }}"
