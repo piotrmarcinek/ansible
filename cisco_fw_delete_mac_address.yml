@@ -15,5 +15,5 @@
       register: output
     - name: Print output
       debug:
-        msg: {{output}}
+        msg: "{{output}}"
         var: output
