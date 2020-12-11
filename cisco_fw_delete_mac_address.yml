@@ -4,5 +4,5 @@
   cisco.ios.ios_config:
     lines:
     - no hardware-address
-    parents: ip dhcp pool DHCP_TZONE_T{{terminal_pool}}
+    parents: ip dhcp pool DHCP_{{terminal_pool}}
     match: exact
