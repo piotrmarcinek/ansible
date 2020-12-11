@@ -8,11 +8,16 @@
         - no hardware-address
         parents: ip dhcp pool DHCP_{{terminal_pool}}
         match: exact
-    - name: Get IP address
+    - name: Get IP pool config
       cisco.ios.ios_command:
         commands:
         - show ip dhcp pool DHCP_{{terminal_pool}}
       register: output
+   
+    - name: Extract IP address
+      set_fact:
+        pool_ip: "{{ output | ansible.netcommon.ipaddr }}"
+   
     - name: Print output
       debug:
-        msg: "{{ output | ansible.netcommon.ipaddr }}"
+        msg: pool_ip
