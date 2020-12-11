@@ -8,3 +8,12 @@
         - no hardware-address
         parents: ip dhcp pool DHCP_{{terminal_pool}}
         match: exact
+    - name: Get IP address
+      cisco.ios.ios_command:
+        commands:
+        - show ip dhcp pool DHCP_{{terminal_pool}}
+      register: output
+    - name: Print output
+      debug:
+        msg: {{output}}
+        var: output
