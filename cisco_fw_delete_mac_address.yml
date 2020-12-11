@@ -20,22 +20,18 @@
    
     - name: Print output
       debug:
-        msg: "{{ pool_ip }}"
+        msg: "Zmieniasz MAC adres dla adresu IP: {{ pool_ip }}"
     
     - name: Get IP pool config
       cisco.ios.ios_command:
         commands:
         - show arp | inc {{ pool_ip }}
       register: output_mac
-      
-    - name: Print output
-      debug:
-        msg: "{{ output_mac }}"
 
     - name: Extract new MAC
       set_fact:
-        pool_mac: "{{ output_mac | regex_replace('^.*([a-z0-9]{4}.[a-z0-9]{4}.[a-z0-9]{4}).*$', '\\1') }}"
+        new_mac: "{{ output_mac | regex_replace('^.*([a-z0-9]{4}.[a-z0-9]{4}.[a-z0-9]{4}).*$', '\\1') }}"
         
     - name: Print output
       debug:
-        msg: "{{ pool_mac }}"
+        msg: "Nowy MAC adres: {{ new_mac }}"
