@@ -27,6 +27,10 @@
         commands:
         - show arp {{ pool_ip }}
       register: output_mac
+      
+    - name: Print output
+      debug:
+        msg: "{{ output_mac }}"
 
     - name: Extract new MAC
       set_fact:
