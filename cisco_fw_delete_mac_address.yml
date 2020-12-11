@@ -20,4 +20,4 @@
    
     - name: Print output
       debug:
-        msg: pool_ip
+        var: pool_ip
