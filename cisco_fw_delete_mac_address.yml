@@ -16,7 +16,7 @@
    
     - name: Extract IP address
       set_fact:
-        pool_ip: "{{ output | ansible.netcommon.ipaddr }}"
+        pool_ip: "{{ output }}"
    
     - name: Print output
       debug:
