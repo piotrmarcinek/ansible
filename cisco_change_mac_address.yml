@@ -15,3 +15,4 @@
         - hardware-address {{ mac }}
         parents: ip dhcp pool DHCP_{{ terminal_pool }}
         match: exact
+        save_when: changed
