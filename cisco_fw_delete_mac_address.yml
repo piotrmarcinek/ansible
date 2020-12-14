@@ -18,13 +18,4 @@
     - name: Extract IP address
       set_stats:
         data:
-          pool_ip: "{{ output_ip.stdout[-1] | replace('\n', '') | regex_replace('^.*(172.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}).*$', '\\1') }}"
-   
-    - name: Set terminal name
-      set_stats:
-        data:
-          terminal_name: "{{ lookup('dig', '{{ pool_ip }}/PTR') | replace('.', '') }}"
-    
-    - name: Print output
-      debug:
-        msg: "Zmieniasz MAC adres dla adresu IP: {{ pool_ip }}"
+          terminal_ip: "{{ output_ip.stdout[-1] | replace('\n', '') | regex_replace('^.*(172.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}).*$', '\\1') }}"
