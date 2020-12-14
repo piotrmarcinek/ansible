@@ -22,6 +22,7 @@
     - name: Set terminal name
       set_fact:
         terminal_name: "{{ lookup('dig', '{{ pool_ip }}/PTR') }}"
+      register: terminal_name
     
     - name: Print output
       debug:
