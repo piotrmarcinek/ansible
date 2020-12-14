@@ -1,4 +1,4 @@
-- name: Cahnge MAC address on DHCP pool
+- name: Change MAC address on DHCP pool
   hosts: "{{cisco_firewall}}-fw"
   gather_facts: no
   tasks:
@@ -12,7 +12,7 @@
     - name: Execute hardware-address
       cisco.ios.ios_config:
         lines:
-        - hardware-address {{ mac }}
+        - hardware-address {{ mac | replace(':', '') | replace('.', '') }}
         parents: ip dhcp pool DHCP_{{ terminal_pool }}
         match: exact
         save_when: changed
