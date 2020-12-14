@@ -1,5 +1,5 @@
 - name: Check availability
-    hosts: "{{ terminal_name }}"
-    gather_facts: false
-    tasks:
-      - ping:
+  hosts: "{{terminal_name}}"
+  gather_facts: false
+  tasks:
+    - ping:
