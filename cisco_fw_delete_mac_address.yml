@@ -17,7 +17,7 @@
     
     - name: Set terminal name
       debug:
-        msg: "Nazwa terminala: {{ lookup('dig', 'vars[ output_ip ]/PTR') }}"
+        msg: "Nazwa terminala: {{ lookup('dig', '172.31.191.66/PTR') }}"
     
     - name: Print output
       debug:
