@@ -14,19 +14,19 @@
         commands:
         - show ip dhcp pool DHCP_{{terminal_pool}}
       register: output_ip
-    
-    - name: Set terminal name
+
+    - name: Extract IP address
+      set_fact:
+        pool_ip: "{{ output_ip.stdout[-1] | replace('\n', '') | regex_replace('^.*(172.[0-9]{1,3}.[0-9]{1,3}.[0-9]).*$', '\\1') }}"
+   
+   - name: Set terminal name
       debug:
-        msg: "Nazwa terminala: {{ lookup('dig', '172.31.191.66/PTR') }}"
+        msg: "Nazwa terminala: {{ lookup('dig', '{{ pool_ip }}/PTR') }}"
     
     - name: Print output
       debug:
         msg: "Nazwa terminala to: {{ terminal_name }}"
     
-    - name: Extract IP address
-      set_fact:
-        pool_ip: "{{ output_ip.stdout[-1] | replace('\n', '') | regex_replace('^.*(172.[0-9]{1,3}.[0-9]{1,3}.[0-9]).*$', '\\1') }}"
-   
     - name: Print output
       debug:
         msg: "Zmieniasz MAC adres dla adresu IP: {{ pool_ip }}"
