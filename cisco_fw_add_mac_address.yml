@@ -1,0 +1,17 @@
+- name: Add MAC address on DHCP pool
+  hosts: "{{cisco_firewall}}-fw"
+  gather_facts: no
+  tasks: 
+    - name: Get IP pool config
+      cisco.ios.ios_command:
+        commands:
+        - show arp | inc {{ pool_ip }}
+      register: output_mac
+
+    - name: Extract new MAC
+      set_fact:
+        new_mac: "{{ output_mac | regex_replace('^.*([a-z0-9]{4}.[a-z0-9]{4}.[a-z0-9]{4}).*$', '\\1') }}"
+        
+    - name: Print output
+      debug:
+        msg: "Nowy MAC adres: {{ new_mac }}"
