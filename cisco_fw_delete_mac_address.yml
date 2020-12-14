@@ -26,10 +26,6 @@
     
     - name: Print output
       debug:
-        msg: "Nazwa terminala to: {{ terminal_name }}"
-    
-    - name: Print output
-      debug:
         msg: "Zmieniasz MAC adres dla adresu IP: {{ pool_ip }}"
     
     - name: Get IP pool config
