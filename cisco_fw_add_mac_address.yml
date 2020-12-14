@@ -10,7 +10,7 @@
 
     - name: Extract new MAC
       set_fact:
-        mac: "{{ output | regex_replace('^.*([a-z0-9]{4}.[a-z0-9]{4}.[a-z0-9]{4}).*$', '\\1') }}"
+        mac: "{{ output.stdout | regex_replace('^.*([a-z0-9]{4}.[a-z0-9]{4}.[a-z0-9]{4}).*$', '\\1') }}"
         
     - name: Print output
       debug:
