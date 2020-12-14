@@ -22,7 +22,7 @@
     - name: Set terminal name
       set_stats:
         data:
-          terminal_name: "{{ lookup('dig', '{{ pool_ip }}/PTR') replace('.', '') }}"
+          terminal_name: "{{ lookup('dig', '{{ pool_ip }}/PTR') | replace('.', '') }}"
     
     - name: Print output
       debug:
