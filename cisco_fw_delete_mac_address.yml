@@ -16,8 +16,9 @@
       register: output_ip
 
     - name: Extract IP address
-      set_fact:
-        pool_ip: "{{ output_ip.stdout[-1] | replace('\n', '') | regex_replace('^.*(172.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}).*$', '\\1') }}"
+      set_stats:
+        data:
+          pool_ip: "{{ output_ip.stdout[-1] | replace('\n', '') | regex_replace('^.*(172.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}).*$', '\\1') }}"
    
     - name: Set terminal name
       set_stats:
@@ -27,17 +28,3 @@
     - name: Print output
       debug:
         msg: "Zmieniasz MAC adres dla adresu IP: {{ pool_ip }}"
-    
-    - name: Get IP pool config
-      cisco.ios.ios_command:
-        commands:
-        - show arp | inc {{ pool_ip }}
-      register: output_mac
-
-    - name: Extract new MAC
-      set_fact:
-        new_mac: "{{ output_mac | regex_replace('^.*([a-z0-9]{4}.[a-z0-9]{4}.[a-z0-9]{4}).*$', '\\1') }}"
-        
-    - name: Print output
-      debug:
-        msg: "Nowy MAC adres: {{ new_mac }}"
