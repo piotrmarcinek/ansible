@@ -17,7 +17,7 @@
     
     - name: Set terminal name
       set_fact:
-        terminal_name: "{{ lookup('dig', '{{ output_ip }}/PTR') }}""
+        terminal_name: "{{ lookup('dig', '{{ output_ip }}/PTR') }}"
     
     - name: Print output
       debug:
