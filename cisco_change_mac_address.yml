@@ -2,11 +2,16 @@
   hosts: "{{cisco_firewall}}-fw"
   gather_facts: no
   tasks:
-    - name: Delete MAC address
-      cisco.ios.ios_command:
-        commands: 
-        - conf t
-        - ip dhcp pool DHCP_TZONE_T{{terminal_pool}}
+    - name: Execute no hardware-address
+      cisco.ios.ios_config:
+        lines:
         - no hardware-address
-        - hardware-address {{hardware_address | replace('.','') | replace(':','') }}
-        - do write
+        parents: ip dhcp pool DHCP_{{terminal_pool}}
+        match: exact
+    
+    - name: Execute hardware-address
+      cisco.ios.ios_config:
+        lines:
+        - hardware-address {{ mac }}
+        parents: ip dhcp pool DHCP_{{ terminal_pool }}
+        match: exact
