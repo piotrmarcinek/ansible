@@ -16,8 +16,8 @@
       register: output_ip
     
     - name: Set terminal name
-      set_fact:
-        terminal_name: "{{ lookup('dig', 'vars[ output_ip ]/PTR') }}"
+      debug:
+        msg: "Nazwa terminala: {{ lookup('dig', 'vars[ output_ip ]/PTR') }}"
     
     - name: Print output
       debug:
