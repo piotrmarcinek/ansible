@@ -1,4 +1,5 @@
-- hosts: "{{ terminal_name }}"
-  gather_facts: false
-  tasks:
-    - ping:
+- name: Check availability
+    hosts: "{{ terminal_name }}"
+    gather_facts: false
+    tasks:
+      - ping:
