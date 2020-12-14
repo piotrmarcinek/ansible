@@ -1,5 +1,5 @@
 - name: Check availability
-  hosts: "{{terminal_name}}"
+  hosts: 0765-t01
   gather_facts: false
   tasks:
     - ping:
