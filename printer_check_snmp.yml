@@ -23,6 +23,7 @@
           uri:
             url: "http://{{inventory_hostname}}/addressbook/GetIndividualInABook.cgi"
             method: POST
+            return_content: yes
             body_format: json
             body:
               ispeedNo: "0"
