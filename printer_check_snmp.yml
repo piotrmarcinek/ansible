@@ -13,10 +13,22 @@
         printer_model: "{{ response.stdout | regex_replace('.*STRING: (.*); .*', '\\1') | regex_replace('.*STRING: (.*)', '\\1')}}"
 
     - name: Configure printer Xerox
+      
       block:
         - name: Print model
           debug:
             msg: "To jest drukarka Xerox"
+          
+        - name: Pokaz rozdzielczość
+          debug:
+            msg: "Rozdzieloczość ustawiona na {{scan_resolution}}"
+          when: scan_resolution is defined
+        
+        - name: Pokaz rozdzielczość
+          debug:
+            msg: "Email ustawiona na {{email}}"
+          when: email is defined  
+          
       when: printer_model == 'Xerox WorkCentre 3345'
 
     - name: Configure printer Samsung
@@ -24,4 +36,15 @@
         - name: Print model
           debug:
             msg: "To jest drukarka Samsung"
+            
+        - name: Pokaz rozdzielczość
+          debug:
+            msg: "Rozdzieloczość ustawiona na {{scan_resolution}}"
+          when: scan_resolution is defined
+        
+        - name: Pokaz rozdzielczość
+          debug:
+            msg: "Email ustawiona na {{email}}"
+          when: email is defined                
+          
       when: printer_model == 'Samsung SL-M3870FW'      
