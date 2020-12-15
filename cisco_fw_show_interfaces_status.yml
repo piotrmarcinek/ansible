@@ -1,0 +1,13 @@
+
+- name: Show Cisco FW Interfaces status
+  hosts: "{{cisco_firewall}}-fw"
+  gather_facts: no
+  tasks:
+    - name: Execute command
+      cisco.ios.ios_command:
+        commands: show interfaces status
+      register: output
+    
+    - name: Print output
+      debug:
+        msg: {{ output.stdout }}
