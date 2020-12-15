@@ -65,6 +65,7 @@
             body:
               DISPLAYNAME: test2@alior.pl
               EMAIL: test2@alior.pl
+              CMD: add
             headers:
               Cookie: SESSION_ID=3554
               Authorization: "Basic YWRtaW46MTExMQ=="
