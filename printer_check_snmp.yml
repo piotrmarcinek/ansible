@@ -1,0 +1,17 @@
+- name: Check if SNMPv3 is working on remote host
+  hosts: "{{ printer_name }}"
+  connection: local
+  gather_facts: no
+ 
+  tasks:
+    - name: Test SNMPv3
+      snmp_facts:
+        version: v2c
+        host: '{{ inventory_hostname }}'
+        community: public
+      register: response
+      ignore_errors: True
+ 
+    - name: Print the complete response
+      debug:
+        var: response
