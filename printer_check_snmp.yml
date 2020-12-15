@@ -5,7 +5,7 @@
  
   tasks:
     - name: Test SNMPv2
-      local_action: snmpget -v2c -c public {{ inventory_hostname }} SNMPv2-MIB::sysDescr.0
+      local_action: command snmpget -v2c -c public {{ inventory_hostname }} SNMPv2-MIB::sysDescr.0
       register: response
       ignore_errors: True
  
