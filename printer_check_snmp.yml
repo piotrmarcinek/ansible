@@ -32,8 +32,29 @@
             headers:
               Cookie: SESSION_ID=3554
               statusSelected: 1
-          register: output
-          
+   
+        - name: set email server
+          uri:
+            url: "http://{{inventory_hostname}}/properties/services/email/SetSmtpCfg.cgi"
+            method: POST
+            return_content: yes
+            body_format: form-urlencoded
+            body:
+              GSI_SMTP_DOMAIN: SSG5-v92
+              GSI_SMTP_SERVER_TYPE: 1
+              serverType: 1
+              GSI_SMTP_SERVER_IP_ADDR: 192.168.95.10
+              GSI_SMTP_PORT_NUMBER: 25
+              GSI_MACHINE_EMAIL_ADDR: agent1@printersmtp.partner-alior.pl
+              GSI_SMTP_ENAUTH: OFF
+              saveNewSmtpPassword: OFF
+              GSI_SMTP_SSL_ENABLE: 0
+              GSI_VALIDATE_SERVER_CERTIFICATE: OFF
+              GSI_SMTP_MAX_SIZE: 32
+            headers:
+              Cookie: SESSION_ID=3554
+              Authorization: Basic YWRtaW46MTExMQ==
+          register: output   
         - name: Pokaz output
           debug:
             var: output
