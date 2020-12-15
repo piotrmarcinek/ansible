@@ -54,7 +54,22 @@
             headers:
               Cookie: SESSION_ID=3554
               Authorization: "Basic YWRtaW46MTExMQ=="
-          register: output   
+
+          
+        - name: set email address
+          uri:
+            url: "http://{{inventory_hostname}}/addressbook/SetIndividualInABook.cgi"
+            method: POST
+            return_content: yes
+            body_format: form-urlencoded
+            body:
+              DISPLAYNAME: test2@alior.pl
+              EMAIL: test2@alior.pl
+            headers:
+              Cookie: SESSION_ID=3554
+              Authorization: "Basic YWRtaW46MTExMQ=="
+          register: output         
+          
         - name: Pokaz output
           debug:
             var: output
