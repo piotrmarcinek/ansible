@@ -74,7 +74,7 @@
           
         - name: Pokaz output
           debug:
-            var: output
+            msg: "{{output.content["success"]}}"
           
       when: printer_model == 'Xerox WorkCentre 3345'
 
