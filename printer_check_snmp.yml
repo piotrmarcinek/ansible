@@ -24,14 +24,14 @@
             url: "http://{{inventory_hostname}}/addressbook/GetIndividualInABook.cgi"
             method: POST
             return_content: yes
-            body_format: json
+            body_format: form-urlencoded
             body:
-              ispeedNo: "0"
-              start: "0"
-              limit: "1000"
+              ispeedNo: 0
+              start: 0
+              limit: 1000
             headers:
-              Cookie: "SESSION_ID=3554"
-              statusSelected: "1"
+              Cookie: SESSION_ID=3554
+              statusSelected: 1
           register: output
           
         - name: Pokaz output
