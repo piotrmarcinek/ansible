@@ -1,5 +1,5 @@
 - name: Check if SNMPv3 is working on remote host
-  hosts: "{{ printer_name }}"
+  hosts: "{{ branch_no }}-printer{{printer_no}}"
   connection: local
   gather_facts: no
  
