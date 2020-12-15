@@ -1,14 +1,11 @@
-- name: Check if SNMPv3 is working on remote host
+- name: Check if SNMPv2 is working on remote host
   hosts: "{{ branch_no }}-printer{{printer_no}}"
   connection: local
   gather_facts: no
  
   tasks:
-    - name: Test SNMPv3
-      snmp_facts:
-        version: v2c
-        host: '{{ inventory_hostname }}'
-        community: public
+    - name: Test SNMPv2
+      local_action: snmpget -v2c -c public {{ inventory_hostname }} SNMPv2-MIB::sysDescr.0
       register: response
       ignore_errors: True
  
