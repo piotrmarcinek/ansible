@@ -15,3 +15,7 @@
     - name: Print printer model
       debug:
         msg: "{{ printer_model }}"
+                
+    - name: Print all facts
+      debug:
+        var: ansible_facts
