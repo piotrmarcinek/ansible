@@ -23,10 +23,11 @@
           uri:
             url: "http://{{inventory_hostname}}/addressbook/GetIndividualInABook.cgi"
             method: POST
-            body: 
-              ispeedNo: 0 
-              start: 0
-              limit: 1000
+            body_format: json
+            body:
+              ispeedNo: "0"
+              start: "0"
+              limit: "1000"
             headers:
               Cookie: SESSION_ID=3554
               statusSelected: 1
