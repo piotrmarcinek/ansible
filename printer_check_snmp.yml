@@ -9,7 +9,7 @@
       register: response
       
     - name: Set printer model fact
-      set_facts:
+      set_fact:
         printer_model: "{{ response.stdout | regex_replace('.*STRING: (.*); .*', '\\1') | regex_replace('.*STRING: (.*)', '\\1')}}"
         
     - name: Print printer model
