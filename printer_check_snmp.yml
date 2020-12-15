@@ -70,7 +70,7 @@
               Cookie: SESSION_ID=3554
               Authorization: "Basic YWRtaW46MTExMQ=="
           register: output
-          when: email
+          when: email | default('', true) | trim != ''
           
         - name: Pokaz output
           debug:
