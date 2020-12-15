@@ -11,4 +11,4 @@
  
     - name: Print the complete response
       debug:
-        msg: "{{ response.stdout | regex_replace('.*STRING: (.*)[;$]', '\\1') }}"
+        msg: "{{ response.stdout | regex_replace('.*STRING: (.*);.*', '\\1') }}"
