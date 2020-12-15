@@ -17,7 +17,7 @@
         - name: Print model
           debug:
             msg: "To jest drukarka Xerox"
-      when: "{{ printer_model }}" == 'Xerox WorkCentre 3345'
+      when: printer_model == 'Xerox WorkCentre 3345'
 
     - name: Configure printer Samsung
       block:
