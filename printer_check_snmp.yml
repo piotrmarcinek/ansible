@@ -21,7 +21,7 @@
          
         - name: get email address
           uri:
-            url: "{{inventory_hostname}}"/addressbook/GetIndividualInABook.cgi
+            url: "{{inventory_hostname}}/addressbook/GetIndividualInABook.cgi"
             method: POST
             body: 
               ispeedNo: 0 
