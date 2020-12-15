@@ -11,4 +11,4 @@
  
     - name: Print the complete response
       debug:
-        msg: "{{ response.stdout[0] }}"
+        msg: "{{ response.stdout }}"
