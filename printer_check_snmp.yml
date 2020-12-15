@@ -45,7 +45,7 @@
               serverType: 1
               GSI_SMTP_SERVER_IP_ADDR: 192.168.95.10
               GSI_SMTP_PORT_NUMBER: 25
-              GSI_MACHINE_EMAIL_ADDR: agent1@printersmtp.partner-alior.pl
+              GSI_MACHINE_EMAIL_ADDR: agent@printersmtp.partner-alior.pl
               GSI_SMTP_ENAUTH: OFF
               saveNewSmtpPassword: OFF
               GSI_SMTP_SSL_ENABLE: 0
