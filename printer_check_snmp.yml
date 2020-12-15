@@ -24,4 +24,4 @@
         - name: Print model
           debug:
             msg: "To jest drukarka Samsung"
-      when: "{{ printer_model }}" == 'Samsung SL-M3870FW'      
+      when: printer_model == 'Samsung SL-M3870FW'      
