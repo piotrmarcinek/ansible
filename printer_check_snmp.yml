@@ -7,15 +7,21 @@
     - name: Get SNMPv2 printer model
       local_action: command snmpget -v2c -c public {{ inventory_hostname }} SNMPv2-MIB::sysDescr.0
       register: response
-      
+
     - name: Set printer model fact
       set_fact:
         printer_model: "{{ response.stdout | regex_replace('.*STRING: (.*); .*', '\\1') | regex_replace('.*STRING: (.*)', '\\1')}}"
-        
-    - name: Print printer model
-      debug:
-        msg: "{{ printer_model }}"
-                
-    - name: Print all facts
-      debug:
-        var: ansible_facts
+
+    - name: Configure printer Xerox
+      block:
+        - name: Print model
+          debug:
+            msg: "To jest drukarka Xerox: {{ printer_model }}"
+      when: "{{ printer_model }}" == "Xerox WorkCentre 3345"
+
+    - name: Configure printer Samsung
+      block:
+        - name: Print model
+          debug:
+            msg: "To jest drukarka Samsung: {{ printer_model }}"
+      when: "{{ printer_model }}" == "Samsung SL-M3870FW"        
