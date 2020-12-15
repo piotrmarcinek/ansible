@@ -53,7 +53,7 @@
               GSI_SMTP_MAX_SIZE: 32
             headers:
               Cookie: SESSION_ID=3554
-              Authorization: Basic YWRtaW46MTExMQ==
+              Authorization: "Basic YWRtaW46MTExMQ=="
           register: output   
         - name: Pokaz output
           debug:
