@@ -69,21 +69,12 @@
             headers:
               Cookie: SESSION_ID=3554
               Authorization: "Basic YWRtaW46MTExMQ=="
-          register: output         
+          register: output
+          when: email
           
         - name: Pokaz output
           debug:
             var: output
-    
-        - name: Pokaz rozdzielczość
-          debug:
-            msg: "Rozdzieloczość ustawiona na {{scan_resolution}}"
-          when: scan_resolution is defined
-        
-        - name: Pokaz rozdzielczość
-          debug:
-            msg: "Email ustawiona na {{email}}"
-          when: email is defined  
           
       when: printer_model == 'Xerox WorkCentre 3345'
 
