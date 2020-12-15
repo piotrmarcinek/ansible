@@ -63,8 +63,8 @@
             return_content: yes
             body_format: form-urlencoded
             body:
-              DISPLAYNAME: test2@alior.pl
-              EMAIL: test2@alior.pl
+              DISPLAYNAME: "{{email}}"
+              EMAIL: "{{email}}"
               CMD: add
             headers:
               Cookie: SESSION_ID=3554
