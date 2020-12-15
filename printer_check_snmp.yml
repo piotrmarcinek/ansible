@@ -18,7 +18,24 @@
         - name: Print model
           debug:
             msg: "To jest drukarka Xerox"
+         
+        - name: get email address
+          uri:
+            url: "{{inventory_hostname}}"/addressbook/GetIndividualInABook.cgi
+            method: POST
+            body: 
+              ispeedNo: 0 
+              start: 0
+              limit: 1000
+            headers:
+              Cookie: SESSION_ID=3554
+              statusSelected: 1
+          register: output
           
+        - name: Pokaz output
+          debug:
+            var: output
+    
         - name: Pokaz rozdzielczość
           debug:
             msg: "Rozdzieloczość ustawiona na {{scan_resolution}}"
