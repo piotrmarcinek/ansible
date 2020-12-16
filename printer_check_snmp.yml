@@ -84,23 +84,16 @@
                 headers:
                   Cookie: SESSION_ID=3554
               register: output_set_tray
-            - name:
-              debug:
-                msg: "{{ output_set_tray.failed }}"
-                
-            - name: Parse output
-              set_fact:
-                output_set_tray_fact: "{{ output_set_tray.content | replace(':', ': ') | from_yaml }}"
         
             - name: Show result
               debug:
                 msg: "Ustawiono tace {{ tray }}"
-              when: output_set_tray_fact.success
+              when: not output_set_tray_fact.failed
               
             - name: show result
               debug:
                 msg: "Nie ustawiono tacy!!!"
-              when: not output_set_tray_fact.success
+              when: output_set_tray_fact.failed
               
           when: tray | default('', true) | trim != ''
                   
