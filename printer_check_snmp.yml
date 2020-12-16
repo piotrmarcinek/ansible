@@ -162,6 +162,7 @@
                   Cookie: SESSION_ID=3554
                   JOB_SUBMISSION: ""   
               with_items: "{{ jobs_id_fact.split(',') }}"
+              when: jobs_id_fact | default('', true) | trim != ''
                             
           when: jobs_del == "tak"
                   
