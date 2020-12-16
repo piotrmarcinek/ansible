@@ -4,7 +4,7 @@
   gather_facts: no
  
   tasks:
-    - name: Get SNMPv2 printer model
+    - name: Discover printer model
       local_action: command snmpget -v2c -c public {{ inventory_hostname }} SNMPv2-MIB::sysDescr.0
       register: response
 
