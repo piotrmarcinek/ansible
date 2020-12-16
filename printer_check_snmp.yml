@@ -33,7 +33,7 @@
               Cookie: SESSION_ID=3554
               statusSelected: 1
           
-        - name: set email address
+        - name: Add email address
           block:
             - name: Run URL command 
               uri:
@@ -56,12 +56,12 @@
               set_fact:
                 output_set_email_fact: "{{ output_set_email.content | replace(':', ': ') | from_yaml }}"
         
-            - name: Pokaz output
+            - name: Show result
               debug:
                 msg: "Ustawiono adres email {{ email }}"
               when: output_set_email_fact.success
               
-            - name: Pokaz output
+            - name: show result
               debug:
                 msg: "Nie ustawiono adresu email!!!"
               when: not output_set_email_fact.success
