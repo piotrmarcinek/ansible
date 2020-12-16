@@ -164,7 +164,7 @@
                 register: output_del_jobs
               with_items: "{{ jobs_id_fact.split(',') }}"
               
-            - name:
+            - name: Print result
               debug:
                 msg: "{{ output_del_jobs }}"
              
