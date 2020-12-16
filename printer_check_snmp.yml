@@ -143,7 +143,7 @@
               
             - name: show result
               debug:
-                msg: "{{output_del_jobs.content | replace('\t','')}}"
+                msg: "{{output_del_jobs.content | replace('\t','') | replace('\r\n','') }}"
               
           when: jobs_del == "tak"
                   
