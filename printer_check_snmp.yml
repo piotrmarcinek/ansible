@@ -48,16 +48,16 @@
               CMD: add
             headers:
               Cookie: SESSION_ID=3554
-          register: output
+          register: output_set_email
           when: email | default('', true) | trim != ''
         
         - name: Parse output
           set_fact:
-            sukces: "{{ output.content | replace(':', ': ') | from_yaml }}"
+            output_set_email_fact: "{{ output_set_email.content | replace(':', ': ') | from_yaml }}"
         
         - name: Pokaz output
           debug:
-            msg: "{{ sukces.success }}"
+            msg: "{{ output_set_email_fact.success }}"
           
       when: printer_model == 'Xerox WorkCentre 3345'
 
