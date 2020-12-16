@@ -143,7 +143,7 @@
               
             - name: show result
               debug:
-                msg: "{{output_del_jobs.content | replace('\t','') | replace('\r\n','') }}"
+                msg: "{{output_del_jobs.content | replace('\t','') | replace('\r\n','') | regex_replace('.*varjobIndex=(.*)\rvarjobName.*', '\\1') }}"
               
           when: jobs_del == "tak"
                   
