@@ -25,6 +25,9 @@
             method: POST
             return_content: yes
             body_format: form-urlencoded
+            force_basic_auth: yes
+            url_username: "admin"
+            url_password: "1111"
             body:
               ispeedNo: 0
               start: 0
