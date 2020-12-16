@@ -148,7 +148,7 @@
         
             - name: Parse output
               set_fact:
-                output_get_speed_no_fact: "{{ output_get_speed_no.content | from_yaml }}"
+                output_get_speed_no_fact: "{{ output_get_speed_no.content }}"
             
             - name: Show result
               debug:
