@@ -124,9 +124,6 @@
                 msg: "Nie ustawiono tacy kopiowania!!!"
               when: output_set_print_tray.failed 
               
-              
-              
-              
           when: tray | default('', true) | trim != ''
                   
       when: printer_model == 'Xerox WorkCentre 3345'
@@ -135,16 +132,24 @@
       block:
         - name: Print model
           debug:
-            msg: "To jest drukarka Samsung"
-            
-        - name: Pokaz rozdzielczość
-          debug:
-            msg: "Rozdzieloczość ustawiona na {{scan_resolution}}"
-          when: scan_resolution is defined
+            msg: "Rozpoznalem drukarke Samsung SL-M3870FW"
+
+        - name: Add email address
+          block:
+            - name: Get speed no 
+              uri:
+                url: "http://{{inventory_hostname}}/sws/app/addressbook/GetUsedSpeedNoInABook.jsp"
+                method: POST
+                return_content: yes
+                body_format: form-urlencoded
+                body:
+                  type: "0"
+              register: output_get_speed_no
         
-        - name: Pokaz rozdzielczość
-          debug:
-            msg: "Email ustawiona na {{email}}"
-          when: email is defined                
+            - name: Show result
+              debug:
+                msg: "{{ output_get_speed_no }}"
+              
+          when: email | default('', true) | trim != ''
           
       when: printer_model == 'Samsung SL-M3870FW'      
