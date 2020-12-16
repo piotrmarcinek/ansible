@@ -145,10 +145,10 @@
               set_fact:
                 jobs_id_fact: "{{output_del_jobs.content | replace('\t','') | replace('\r','') | replace('\n','') | regex_replace('.*varjobIndex.*\"(.*)\".*varjobName=.*', '\\1') }}"
             
-            -name: loop over jobs id
-             debug:
-              msg: "Element {{ item }}"
-             with_item: "{{ jobs_id_fact.split(',') }}"
+            - name: loop over jobs id
+              debug:
+                msg: "Element {{ item }}"
+              with_item: "{{ jobs_id_fact.split(',') }}"
              
           when: jobs_del == "tak"
                   
