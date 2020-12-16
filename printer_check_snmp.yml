@@ -96,6 +96,7 @@
               when: output_set_copy_tray.failed
 
             - name: Run URL command - tray print
+              uri:
                 url: "http://{{inventory_hostname}}/SaveChanges.cgi"
                 method: POST
                 return_content: yes
