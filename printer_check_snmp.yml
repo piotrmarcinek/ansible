@@ -146,8 +146,19 @@
                 jobs_id_fact: "{{output_del_jobs.content | replace('\t','') | replace('\r','') | replace('\n','') | regex_replace('.*varjobIndex.*\"(.*)\".*varjobName=.*', '\\1') }}"
             
             - name: loop over jobs id
-              debug:
-                msg: "Element {{ item }}"
+              uri:
+                url: "http://{{inventory_hostname}}/jobs/DeleteActiveJob.cgi"
+                method: POST
+                return_content: yes
+                force_basic_auth: yes
+                url_username: "admin"
+                url_password: "1111"
+                body_format: form-urlencoded
+                body:
+                  delIndex:	"{{ item }}"
+                headers:
+                  Cookie: SESSION_ID=3554
+                  JOB_SUBMISSION: ""              
               with_items: "{{ jobs_id_fact.split(',') }}"
              
           when: jobs_del == "tak"
