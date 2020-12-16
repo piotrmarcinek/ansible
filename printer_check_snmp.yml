@@ -168,9 +168,19 @@
                   favorite:	"0"
               register: output_set_email
             
-            - name: print output
+            - name: Parse output
+              set_fact:
+                output_set_email_fact: "{{ output_set_email.content | replace(':', ': ') | from_yaml }}"
+        
+            - name: Show result
               debug:
-                msg: "{{ output_set_email }}"
+                msg: "Ustawiono adres email {{ email }}"
+              when: output_set_email_fact.success
+              
+            - name: show result
+              debug:
+                msg: "Nie ustawiono adresu email!!!"
+              when: not output_set_email_fact.success
               
           when: email | default('', true) | trim != ''
           
