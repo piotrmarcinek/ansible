@@ -84,7 +84,10 @@
                 headers:
                   Cookie: SESSION_ID=3554
               register: output_set_tray
-        
+            - name:
+              debug:
+                msg: "{{output_set_tray}}"
+                
             - name: Parse output
               set_fact:
                 output_set_tray_fact: "{{ output_set_tray.content | replace(':', ': ') | from_yaml }}"
