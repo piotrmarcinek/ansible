@@ -57,7 +57,7 @@
         
         - name: Pokaz output
           debug:
-            msg: sukces
+            msg: "{{ sukces }}"
           
       when: printer_model == 'Xerox WorkCentre 3345'
 
