@@ -128,12 +128,14 @@
 
         - name: Del jobs
           block:
-            - name: Run URL command 
+            - name: Run URL command - del jobs
               uri:
                 url: "http://{{inventory_hostname}}/jobs/activeJobs.dhtml"
                 method: POST
                 return_content: yes
-                body_format: form-urlencoded
+                force_basic_auth: yes
+                url_username: "admin"
+                url_password: "1111"
               register: output_del_jobs
               
             - name: show result
