@@ -86,7 +86,7 @@
               register: output_set_tray
             - name:
               debug:
-                msg: "{{output_set_tray}}"
+                msg: "{{output_set_tray.content.failed}}"
                 
             - name: Parse output
               set_fact:
