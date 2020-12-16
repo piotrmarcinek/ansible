@@ -53,7 +53,7 @@
           
         - name: Pokaz output
           debug:
-            msg: "{{ output.content.success | replace(':', ': ') | from_yaml }}"
+            msg: "{{ output.content | replace(':', ': ') | from_yaml }}"
           
       when: printer_model == 'Xerox WorkCentre 3345'
 
