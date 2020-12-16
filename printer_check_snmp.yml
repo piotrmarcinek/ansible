@@ -146,9 +146,13 @@
                   type: "0"
               register: output_get_speed_no
         
+            - name: Parse output
+              set_fact:
+                output_get_speed_no_fact: "{{ output_get_speed_no.content | from_yaml }}"
+            
             - name: Show result
               debug:
-                msg: "{{ output_get_speed_no }}"
+                msg: "{{ output_get_speed_no_fact.usedSpeedNo }}"
               
           when: email | default('', true) | trim != ''
           
