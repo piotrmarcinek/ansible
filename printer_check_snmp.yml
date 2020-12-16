@@ -34,30 +34,33 @@
               statusSelected: 1
           
         - name: set email address
-          uri:
-            url: "http://{{inventory_hostname}}/addressbook/SetIndividualInABook.cgi"
-            method: POST
-            return_content: yes
-            force_basic_auth: yes
-            url_username: "admin"
-            url_password: "1111"
-            body_format: form-urlencoded
-            body:
-              DISPLAYNAME: "{{email}}"
-              EMAIL: "{{email}}"
-              CMD: add
-            headers:
-              Cookie: SESSION_ID=3554
-          register: output_set_email
+          block:
+            - name: Run URL command 
+               uri:
+                url: "http://{{inventory_hostname}}/addressbook/SetIndividualInABook.cgi"
+                method: POST
+                return_content: yes
+                force_basic_auth: yes
+                url_username: "admin"
+                url_password: "1111"
+                body_format: form-urlencoded
+                body:
+                  DISPLAYNAME: "{{email}}"
+                  EMAIL: "{{email}}"
+                  CMD: add
+                headers:
+                  Cookie: SESSION_ID=3554
+                register: output_set_email
+        
+            - name: Parse output
+              set_fact:
+                output_set_email_fact: "{{ output_set_email.content | replace(':', ': ') | from_yaml }}"
+        
+            - name: Pokaz output
+              debug:
+                msg: "{{ output_set_email_fact.success }}"
+              
           when: email | default('', true) | trim != ''
-        
-        - name: Parse output
-          set_fact:
-            output_set_email_fact: "{{ output_set_email.content | replace(':', ': ') | from_yaml }}"
-        
-        - name: Pokaz output
-          debug:
-            msg: "{{ output_set_email_fact.success }}"
           
       when: printer_model == 'Xerox WorkCentre 3345'
 
