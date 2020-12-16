@@ -68,6 +68,39 @@
               
           when: email | default('', true) | trim != ''
           
+        - name: Change paper tray
+          block:
+            - name: Run URL command 
+              uri:
+                url: "http://{{inventory_hostname}}/properties/services/copy/SetCopyConfiguration.cgi"
+                method: POST
+                return_content: yes
+                force_basic_auth: yes
+                url_username: "admin"
+                url_password: "1111"
+                body_format: form-urlencoded
+                body:
+                  COPY_PAPER_SOURCE_OP: "{{tray}}"
+                headers:
+                  Cookie: SESSION_ID=3554
+              register: output_set_tray
+        
+            - name: Parse output
+              set_fact:
+                output_set_tray_fact: "{{ output_set_tray.content | replace(':', ': ') | from_yaml }}"
+        
+            - name: Show result
+              debug:
+                msg: "Ustawiono tace {{ tray }}"
+              when: output_set_tray_fact.success
+              
+            - name: show result
+              debug:
+                msg: "Nie ustawiono tacy!!!"
+              when: not output_set_tray_fact.success
+              
+          when: tray | default('', true) | trim != ''
+                  
       when: printer_model == 'Xerox WorkCentre 3345'
 
     - name: Configure printer Samsung
