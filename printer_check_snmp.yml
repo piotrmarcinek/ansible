@@ -152,7 +152,7 @@
             
             - name: Show result
               debug:
-                msg: "{{ output_get_speed_no_fact.usedSpeedNo }}"
+                msg: "{{ output_get_speed_no_fact.usedSpeedNo[-2:] }}"
               
           when: email | default('', true) | trim != ''
           
