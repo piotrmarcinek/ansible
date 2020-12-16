@@ -136,6 +136,9 @@
                 force_basic_auth: yes
                 url_username: "admin"
                 url_password: "1111"
+                headers:
+                  Cookie: SESSION_ID=3554
+                  JOB_SUBMISSION: ""
               register: output_del_jobs
               
             - name: show result
