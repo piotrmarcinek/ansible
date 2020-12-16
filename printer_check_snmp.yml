@@ -70,7 +70,7 @@
           
         - name: Change paper tray
           block:
-            - name: Run URL command 
+            - name: Run URL command - tray copy
               uri:
                 url: "http://{{inventory_hostname}}/properties/services/copy/SetCopyConfiguration.cgi"
                 method: POST
@@ -94,6 +94,34 @@
               debug:
                 msg: "Nie ustawiono tacy kopiowania!!!"
               when: output_set_copy_tray.failed
+
+            - name: Run URL command - tray print
+                url: "http://{{inventory_hostname}}/SaveChanges.cgi"
+                method: POST
+                return_content: yes
+                force_basic_auth: yes
+                url_username: "admin"
+                url_password: "1111"
+                body_format: form-urlencoded
+                body:
+                  GSI_AUTO_TRAY_SWITCH:	"0"
+                  GSI_PCL_IGNORE_PAPER_SIZE:	"1"
+                headers:
+                  Cookie: SESSION_ID=3554
+              register: output_set_print_tray
+           
+            - name: Show result
+              debug:
+                msg: "Ustawiono tace drukowania: Bypass=off, Tray Switching=disabled"
+              when: not output_set_print_tray.failed
+              
+            - name: show result
+              debug:
+                msg: "Nie ustawiono tacy kopiowania!!!"
+              when: output_set_print_tray.failed 
+              
+              
+              
               
           when: tray | default('', true) | trim != ''
                   
