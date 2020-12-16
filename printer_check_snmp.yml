@@ -39,8 +39,8 @@
             method: POST
             return_content: yes
             force_basic_auth: yes
-            url_username: admin
-            url_password: 1111
+            url_username: "admin"
+            url_password: "1111"
             body_format: form-urlencoded
             body:
               DISPLAYNAME: "{{email}}"
