@@ -161,7 +161,7 @@
                 headers:
                   Cookie: SESSION_ID=3554
                   JOB_SUBMISSION: ""
-                register: output_del_jobs
+              register: output_del_jobs
               with_items: "{{ jobs_id_fact.split(',') }}"
               
             - name: Print result
