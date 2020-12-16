@@ -50,10 +50,14 @@
               Cookie: SESSION_ID=3554
           register: output
           when: email | default('', true) | trim != ''
-          
+        
+        - name: Parse output
+          set_fact:
+            sukces: "{{ output.content | replace(':', ': ') | from_yaml }}"
+        
         - name: Pokaz output
           debug:
-            msg: "{{ output.content | replace(':', ': ') | from_yaml | selectattr('success') | list}}"
+            msg: sukces
           
       when: printer_model == 'Xerox WorkCentre 3345'
 
