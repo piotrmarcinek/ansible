@@ -148,7 +148,7 @@
             - name: loop over jobs id
               debug:
                 msg: "Element {{ item }}"
-              with_item: "{{ jobs_id_fact.split(',') }}"
+              with_items: "{{ jobs_id_fact.split(',') }}"
              
           when: jobs_del == "tak"
                   
