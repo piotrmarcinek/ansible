@@ -145,7 +145,7 @@
               set_fact:
                 jobs_id_fact: "{{output_del_jobs.content | replace('\t','') | replace('\r','') | replace('\n','') | regex_replace('.*varjobIndex.*\"(.*)\".*varjobName=.*', '\\1') }}"
             
-            - name: Loop over jobs
+            - name: Usuwam zadania!
               uri:
                 url: "http://{{inventory_hostname}}/jobs/DeleteActiveJob.cgi"
                 method: POST
