@@ -141,11 +141,11 @@
                   JOB_SUBMISSION: ""
               register: output_del_jobs
               
-            - name: set fact jobs id
+            - name: Set fact jobs id
               set_fact:
                 jobs_id_fact: "{{output_del_jobs.content | replace('\t','') | replace('\r','') | replace('\n','') | regex_replace('.*varjobIndex.*\"(.*)\".*varjobName=.*', '\\1') }}"
             
-            - name: loop over jobs id
+            - name: Loop over jobs
               uri:
                 url: "http://{{inventory_hostname}}/jobs/DeleteActiveJob.cgi"
                 method: POST
@@ -160,8 +160,13 @@
                   secureId: ""
                 headers:
                   Cookie: SESSION_ID=3554
-                  JOB_SUBMISSION: ""              
+                  JOB_SUBMISSION: ""
+                register: output_del_jobs
               with_items: "{{ jobs_id_fact.split(',') }}"
+              
+              - name:
+                debug:
+                  msg: "{{ output_del_jobs }}"
              
           when: jobs_del == "tak"
                   
