@@ -123,8 +123,24 @@
               debug:
                 msg: "Nie ustawiono tacy kopiowania!!!"
               when: output_set_print_tray.failed 
-              
+         
           when: tray | default('', true) | trim != ''
+
+        - name: Del jobs
+          block:
+            - name: Run URL command 
+              uri:
+                url: "http://{{inventory_hostname}}/jobs/activeJobs.dhtml"
+                method: POST
+                return_content: yes
+                body_format: form-urlencoded
+              register: output_del_jobs
+              
+            - name: show result
+              debug:
+                msg: "{{output_del_jobs}}"
+              
+          when: jobs_del == "tak"
                   
       when: printer_model == 'Xerox WorkCentre 3345'
 
