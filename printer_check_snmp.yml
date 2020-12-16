@@ -50,7 +50,7 @@
                   CMD: add
                 headers:
                   Cookie: SESSION_ID=3554
-                register: output_set_email
+              register: output_set_email
         
             - name: Parse output
               set_fact:
