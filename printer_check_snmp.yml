@@ -156,6 +156,8 @@
                 body_format: form-urlencoded
                 body:
                   delIndex:	"{{ item }}"
+                  selIndex: "0"
+                  secureId: ""
                 headers:
                   Cookie: SESSION_ID=3554
                   JOB_SUBMISSION: ""              
