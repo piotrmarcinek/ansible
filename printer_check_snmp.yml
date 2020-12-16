@@ -148,11 +148,11 @@
         
             - name: Parse output
               set_fact:
-                output_get_speed_no_fact: "{{ output_get_speed_no.content }}"
+                output_get_speed_no_fact: "{{ output_get_speed_no.content | from_yaml }}"
             
             - name: Show result
               debug:
-                msg: "{{ output_get_speed_no_fact.usedSpeedNo | regex_replace('.*,([0-9]{1,3})', '\\1') }}"
+                msg: "{{ output_get_speed_no_fact.usedSpeedNo | regex_replace('.*,([0-9]{1,3})', '\\1') | int + 1 }}"
               
           when: email | default('', true) | trim != ''
           
