@@ -59,12 +59,12 @@
             - name: Pokaz output
               debug:
                 msg: "Ustawiono adres email {{ email }}"
-              when: "{{ output_set_email_fact.success }}"
+              when: output_set_email_fact.success
               
             - name: Pokaz output
               debug:
                 msg: "Nie ustawiono adresu email!!!"
-              when: not "{{ output_set_email_fact.success }}"
+              when: not output_set_email_fact.success
               
           when: email | default('', true) | trim != ''
           
