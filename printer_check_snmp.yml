@@ -88,12 +88,12 @@
             - name: Show result
               debug:
                 msg: "Ustawiono tace {{ tray }}"
-              when: not output_set_tray_fact.failed
+              when: not output_set_tray.failed
               
             - name: show result
               debug:
                 msg: "Nie ustawiono tacy!!!"
-              when: output_set_tray_fact.failed
+              when: output_set_tray.failed
               
           when: tray | default('', true) | trim != ''
                   
