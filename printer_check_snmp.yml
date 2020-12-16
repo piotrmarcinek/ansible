@@ -143,7 +143,7 @@
               
             - name: show result
               debug:
-                msg: "{{output_del_jobs.content | regex_replace('.*(jobIndex.*;).*', '\\1')}}"
+                msg: "{{output_del_jobs.content | replace('\t','')}}"
               
           when: jobs_del == "tak"
                   
