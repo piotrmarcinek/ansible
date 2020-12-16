@@ -160,12 +160,7 @@
                   secureId: ""
                 headers:
                   Cookie: SESSION_ID=3554
-                  JOB_SUBMISSION: ""
-              register: output_del_jobs
-              
-              debug:
-                msg: "{{ output_del_jobs }}"
-             
+                  JOB_SUBMISSION: ""   
               with_items: "{{ jobs_id_fact.split(',') }}"
                             
           when: jobs_del == "tak"
