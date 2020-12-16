@@ -83,17 +83,17 @@
                   COPY_PAPER_SOURCE_OP: "{{tray}}"
                 headers:
                   Cookie: SESSION_ID=3554
-              register: output_set_tray
+              register: output_set_copy_tray
         
             - name: Show result
               debug:
-                msg: "Ustawiono tace {{ tray }}"
-              when: not output_set_tray.failed
+                msg: "Ustawiono tace kopiowania: {{ tray }}"
+              when: not output_set_copy_tray.failed
               
             - name: show result
               debug:
-                msg: "Nie ustawiono tacy!!!"
-              when: output_set_tray.failed
+                msg: "Nie ustawiono tacy kopiowania!!!"
+              when: output_set_copy_tray.failed
               
           when: tray | default('', true) | trim != ''
                   
