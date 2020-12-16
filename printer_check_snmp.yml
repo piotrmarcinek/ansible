@@ -49,12 +49,11 @@
             headers:
               Cookie: SESSION_ID=3554
           register: output
-          output_var: "{{ output.content | replace(':', ': ') | from_yaml }}"
           when: email | default('', true) | trim != ''
           
         - name: Pokaz output
           debug:
-            msg: "{{ output_var }}"
+            msg: "{{ output.content.success | replace(':', ': ') | from_yaml }}"
           
       when: printer_model == 'Xerox WorkCentre 3345'
 
