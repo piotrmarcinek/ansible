@@ -128,7 +128,7 @@
 
         - name: Del jobs
           block:
-            - name: Run URL command - del jobs
+            - name: Run URL command - get jobs id
               uri:
                 url: "http://{{inventory_hostname}}/jobs/activeJobs.dhtml"
                 method: POST
@@ -141,10 +141,15 @@
                   JOB_SUBMISSION: ""
               register: output_del_jobs
               
-            - name: show result
-              debug:
-                msg: "{{output_del_jobs.content | replace('\t','') | replace('\r','') | replace('\n','') | regex_replace('.*varjobIndex.*\"(.*)\".*varjobName=.*', '\\1') }}"
-              
+            - name: set fact jobs id
+              set_fact:
+                jobs_id_fact: "{{output_del_jobs.content | replace('\t','') | replace('\r','') | replace('\n','') | regex_replace('.*varjobIndex.*\"(.*)\".*varjobName=.*', '\\1') }}"
+            
+            -name: loop over jobs id
+             debug:
+              msg: "Element {{ item }}"
+             with_item: "{{ jobs_id_fact.split(',') }}"
+             
           when: jobs_del == "tak"
                   
       when: printer_model == 'Xerox WorkCentre 3345'
