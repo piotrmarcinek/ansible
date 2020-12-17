@@ -222,12 +222,7 @@
               
             - name: Set fact jobs id
               set_fact:
-                jobs_id_fact: "{{output_del_jobs.content | replace('no', 'job_id') | from_yaml }}"
-            
-            - name: print debug
-              debug:
-                msg: "{{jobs_id_fact}}"
-            
+                jobs_id_fact: "{{output_del_jobs.content | replace('no', 'job_id') | from_yaml }}"        
             
             - name: Run URL command - get jobs id
               uri:
@@ -245,11 +240,11 @@
             
             - name: print
               set_fact:
-                job_del_status: "{{ output_del_jobs_status.results | from_yaml}}"
+                job_del_status: "{{ output_del_jobs_status.results | from_json}}"
                 
             - name: print
               debug:
-                msg: "{{job_del_status.content}}"
+                msg: "{{job_del_status}}"
                             
           when: jobs_del == "tak"         
       
