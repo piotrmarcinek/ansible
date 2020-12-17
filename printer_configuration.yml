@@ -240,11 +240,11 @@
             
             - name: print
               set_fact:
-                job_del_status: "{{ output_del_jobs_status.results | from_yaml}}"
+                job_del_status: "{{ output_del_jobs_status.results }}"
                 
             - name: print
               debug:
-                msg: "{{job_del_status[0]['content']['success']}}"
+                msg: "{{job_del_status[0]['content'] | regex_replace('{success:(.*)}', '\\1') }}"
                             
           when: jobs_del == "tak"         
       
