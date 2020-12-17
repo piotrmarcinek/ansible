@@ -222,7 +222,7 @@
               
             - name: Set fact jobs id
               set_fact:
-                jobs_id_fact: "{{output_del_jobs.content }}"
+                jobs_id_fact: "{{output_del_jobs.content | from_yaml }}"
              
             - name: Print output
               debug:
