@@ -248,4 +248,5 @@
                 job_del_status: "{{ output_del_jobs_status.results }}
                             
           when: jobs_del == "tak"         
+      
       when: printer_model == 'Samsung SL-M3870FW'      
