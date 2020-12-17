@@ -242,11 +242,13 @@
                   "no": "{{ item['job_id'] }}"
               register: output_del_jobs_status            
               with_items: "{{ jobs_id_fact['recordData'] }}"
-              
+            - name:
+              set_fact:
+                job_del_status: "{{output_del_jobs_status['results']}}
               
             - name:
               debug:
-                msg: "{{output_del_jobs_status['results']['content']}}"
+                msg: "{{job_del_status}}"
                             
           when: jobs_del == "tak"         
       when: printer_model == 'Samsung SL-M3870FW'      
