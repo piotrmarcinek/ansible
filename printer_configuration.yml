@@ -214,6 +214,10 @@
                 url: "http://{{inventory_hostname}}/sws/app/gnb/jobs/GetActiveJobs.jsp"
                 method: POST
                 return_content: yes
+                body_format: form-urlencoded
+                body:
+                  start: "0"
+                  limit: "10"
               register: output_del_jobs
               
             - name: Set fact jobs id
