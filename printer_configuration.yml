@@ -246,10 +246,6 @@
             - name: print
               set_fact:
                 job_del_status: "{{ output_del_jobs_status.results }}
-            
-            - name: print output
-              debug:
-                msg: "{{ job_del_status }}"
                             
           when: jobs_del == "tak"         
       when: printer_model == 'Samsung SL-M3870FW'      
