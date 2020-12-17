@@ -222,11 +222,11 @@
               
             - name: Set fact jobs id
               set_fact:
-                jobs_id_fact: "{{output_del_jobs}}"
+                jobs_id_fact: "{{output_del_jobs.content | replace('\r', ' ') | replace('\n', ' ') }}"
             
             - name: Usuwam zadania!
               debug:
-                msg: "{{ output_del_jobs }}"
+                msg: "{{ jobs_id_fact }}"
                             
           when: jobs_del == "tak"         
       when: printer_model == 'Samsung SL-M3870FW'      
