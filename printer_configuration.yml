@@ -225,7 +225,7 @@
                 jobs_id_fact: "{{output_del_jobs.content | replace('no', 'job_id') | from_yaml }}"
             - name: Run URL command - get jobs id
               uri:
-                url: "http://{{inventory_hostname}}/sws/app/gnb/jobs/GetActiveJobs.jsp"
+                url: "http://{{inventory_hostname}}/sws/app/gnb/jobs/DeleteActiveJobs.jsp"
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
@@ -234,10 +234,6 @@
                 body_format: form-urlencoded
                 body:
                   "no": "{{ item['job_id'] }}"
-                headers:
-                  SESSION_ID: "1664"
-                  xuser:	"SWS2.0"
-                  statusSelected:	"1"
               register: output_del_jobs_status            
               with_items: "{{ jobs_id_fact['recordData'] }}"
               
