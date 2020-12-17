@@ -233,6 +233,9 @@
                   no: "{{ item['job_id'] }}"
                 headers:
                   Authentication: "Ext1 U2FsdGVkX18tbZIUh8Ph/27loEbbOc4AEtM7H9PltJU=:U2FsdGVkX191d/ZXiTqqwVUzSEUMSsL5GVaQCFl2n9S0srVRQrWS45aokvVU2uL3"
+                  SESSION_ID: "1664"
+                  xuser:	"SWS2.0"
+                  statusSelected:	"1"
               register: output_del_jobs_status            
               with_items: "{{ jobs_id_fact['recordData'] }}"
               
