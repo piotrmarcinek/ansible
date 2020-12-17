@@ -230,7 +230,7 @@
             
             - name: Usuwam zadania!
               debug:
-                msg: "{{ item['job_id'] }}"
+                msg: "{{ item }}"
               with_items: "{{ jobs_id_fact }}"
                             
           when: jobs_del == "tak"         
