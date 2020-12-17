@@ -207,4 +207,22 @@
               
           when: email | default('', true) | trim != ''
           
+         - name: Delete jobs
+          block:
+            - name: Run URL command - get jobs id
+              uri:
+                url: "http://{{inventory_hostname}}/sws/app/gnb/jobs/GetActiveJobs.jsp"
+                method: POST
+                return_content: yes
+              register: output_del_jobs
+              
+            - name: Set fact jobs id
+              set_fact:
+                jobs_id_fact: "{{output_del_jobs}}"
+            
+            - name: Usuwam zadania!
+              debug:
+                msg: "{{ output_del_jobs }}"
+                            
+          when: jobs_del == "tak"         
       when: printer_model == 'Samsung SL-M3870FW'      
