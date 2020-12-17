@@ -226,7 +226,7 @@
             
             - name: Usuwam zadania!
               debug:
-                msg: "{{ item['no'] }}"
+                msg: "{{ item }}"
               with_items: "{{ jobs_id_fact['recordData'] }}"
                             
           when: jobs_del == "tak"         
