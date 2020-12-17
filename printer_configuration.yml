@@ -247,7 +247,7 @@
               set_fact:
                 job_del_status: "{{ output_del_jobs_status.results }}
             
-            - name: print
+            - name: print output
               debug:
                 msg: "{{ job_del_status }}"
                             
