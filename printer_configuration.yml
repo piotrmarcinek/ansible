@@ -230,8 +230,8 @@
             
             - name: Usuwam zadania!
               debug:
-                msg: "{{ item }}"
-              with_items: "{{ jobs_id_fact }}"
+                msg: "{{ item['job_id'] }}"
+              with_items: "{{ jobs_id_fact['recordData'] }}"
                             
           when: jobs_del == "tak"         
       when: printer_model == 'Samsung SL-M3870FW'      
