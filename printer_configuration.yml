@@ -223,10 +223,6 @@
             - name: Set fact jobs id
               set_fact:
                 jobs_id_fact: "{{output_del_jobs.content | replace('no', 'job_id') | from_yaml }}"
-             
-            - name: Print output
-              debug:
-                msg: "{{jobs_id_fact}}"
             
             - name: Usuwam zadania!
               debug:
