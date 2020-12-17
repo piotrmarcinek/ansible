@@ -242,11 +242,12 @@
                   "no": "{{ item['job_id'] }}"
               register: output_del_jobs_status            
               with_items: "{{ jobs_id_fact['recordData'] }}"
-            - name:
+            
+            - name: print
               set_fact:
                 job_del_status: "{{output_del_jobs_status['results']}}
               
-            - name:
+            - name: prut
               debug:
                 msg: "{{job_del_status}}"
                             
