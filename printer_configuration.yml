@@ -249,7 +249,7 @@
                 
             - name: print
               debug:
-                msg: "{{job_del_status}}"
+                msg: "{{job_del_status.content}}"
                             
           when: jobs_del == "tak"         
       
