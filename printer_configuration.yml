@@ -249,7 +249,7 @@
             
             - name: print
               debug:
-                msg: "{{jobs_del_status}}"
+                msg: "{{job_del_status}}"
                             
           when: jobs_del == "tak"         
       when: printer_model == 'Samsung SL-M3870FW'      
