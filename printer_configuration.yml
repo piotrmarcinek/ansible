@@ -223,6 +223,12 @@
             - name: Set fact jobs id
               set_fact:
                 jobs_id_fact: "{{output_del_jobs.content | replace('no', 'job_id') | from_yaml }}"
+            
+            - name: print debug
+              debug:
+                msg: "{{jobs_id_fact}}"
+            
+            
             - name: Run URL command - get jobs id
               uri:
                 url: "http://{{inventory_hostname}}/sws/app/gnb/jobs/DeleteActiveJobs.jsp"
@@ -236,6 +242,7 @@
                   "no": "{{ item['job_id'] }}"
               register: output_del_jobs_status            
               with_items: "{{ jobs_id_fact['recordData'] }}"
+              
               
             - name:
               debug:
