@@ -240,7 +240,7 @@
             
             - name: print
               set_fact:
-                job_del_status: "{{ output_del_jobs_status.results | from_json}}"
+                job_del_status: "{{ output_del_jobs_status.results }}"
                 
             - name: print
               debug:
