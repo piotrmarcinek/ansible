@@ -222,7 +222,7 @@
               
             - name: Set fact jobs id
               set_fact:
-                jobs_id_fact: "{{output_del_jobs.content | replace('\', '') | from_yaml }}"
+                jobs_id_fact: "{{output_del_jobs.content | replace('no', 'job_id') | from_yaml }}"
              
             - name: Print output
               debug:
@@ -230,7 +230,7 @@
             
             - name: Usuwam zadania!
               debug:
-                msg: "{{ item }}"
+                msg: "{{ item['job_id'] }}"
               with_items: "{{ jobs_id_fact }}"
                             
           when: jobs_del == "tak"         
