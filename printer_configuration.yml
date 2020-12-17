@@ -207,7 +207,7 @@
               
           when: email | default('', true) | trim != ''
           
-         - name: Delete jobs
+        - name: Delete jobs
           block:
             - name: Run URL command - get jobs id
               uri:
