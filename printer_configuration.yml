@@ -1,4 +1,4 @@
-- name: Check if SNMPv2 is working on remote host
+- name: Printer configuration
   hosts: "{{ branch_no }}-printer{{printer_no}}"
   connection: local
   gather_facts: no
@@ -12,29 +12,12 @@
       set_fact:
         printer_model: "{{ response.stdout | regex_replace('.*STRING: (.*); .*', '\\1') | regex_replace('.*STRING: (.*)', '\\1')}}"
 
-    - name: Configure printer Xerox
+    - name: Configure Xerox printer
       
       block:
         - name: Print model
           debug:
-            msg: "To jest drukarka Xerox"
-         
-        - name: get email address
-          uri:
-            url: "http://{{inventory_hostname}}/addressbook/GetIndividualInABook.cgi"
-            method: POST
-            return_content: yes
-            body_format: form-urlencoded
-            force_basic_auth: yes
-            url_username: "admin"
-            url_password: "1111"
-            body:
-              ispeedNo: 0
-              start: 0
-              limit: 1000
-            headers:
-              Cookie: SESSION_ID=3554
-              statusSelected: 1
+            msg: "Rozpoznałem drukarke WorkCentre 3345"
           
         - name: Add email address
           block:
@@ -59,12 +42,12 @@
               set_fact:
                 output_set_email_fact: "{{ output_set_email.content | replace(':', ': ') | from_yaml }}"
         
-            - name: Show result
+            - name: Print result
               debug:
                 msg: "Ustawiono adres email {{ email }}"
               when: output_set_email_fact.success
               
-            - name: show result
+            - name: Print result
               debug:
                 msg: "Nie ustawiono adresu email!!!"
               when: not output_set_email_fact.success
@@ -73,7 +56,7 @@
           
         - name: Change paper tray
           block:
-            - name: Run URL command - tray copy
+            - name: Run URL command - copy tray
               uri:
                 url: "http://{{inventory_hostname}}/properties/services/copy/SetCopyConfiguration.cgi"
                 method: POST
@@ -88,17 +71,17 @@
                   Cookie: SESSION_ID=3554
               register: output_set_copy_tray
         
-            - name: Show result
+            - name: Print result
               debug:
                 msg: "Ustawiono tace kopiowania: {{ tray }}"
               when: not output_set_copy_tray.failed
               
-            - name: show result
+            - name: Print result
               debug:
                 msg: "Nie ustawiono tacy kopiowania!!!"
               when: output_set_copy_tray.failed
 
-            - name: Run URL command - tray print
+            - name: Run URL command - print tray
               uri:
                 url: "http://{{inventory_hostname}}/SaveChanges.cgi"
                 method: POST
@@ -114,19 +97,19 @@
                   Cookie: SESSION_ID=3554
               register: output_set_print_tray
            
-            - name: Show result
+            - name: Print result
               debug:
                 msg: "Ustawiono tace drukowania: Bypass=off, Tray Switching=disabled"
               when: not output_set_print_tray.failed
               
-            - name: show result
+            - name: Print result
               debug:
                 msg: "Nie ustawiono tacy kopiowania!!!"
               when: output_set_print_tray.failed 
          
           when: tray | default('', true) | trim != ''
 
-        - name: Del jobs
+        - name: Delete jobs
           block:
             - name: Run URL command - get jobs id
               uri:
@@ -168,7 +151,7 @@
                   
       when: printer_model == 'Xerox WorkCentre 3345'
 
-    - name: Configure printer Samsung
+    - name: Configure Samsung SL-M3870FW printer
       block:
         - name: Print model
           debug:
@@ -190,7 +173,7 @@
               set_fact:
                 output_get_speed_no_fact: "{{ output_get_speed_no.content | from_yaml }}"
             
-            - name: Show result
+            - name: Print result
               debug:
                 msg: "{{ output_get_speed_no_fact.usedSpeedNo | regex_replace('.*,([0-9]{1,3})', '\\1') | int + 1 }}"
          
@@ -212,12 +195,12 @@
               set_fact:
                 output_set_email_fact: "{{ output_set_email.content | replace(':', ': ') | from_yaml }}"
         
-            - name: Show result
+            - name: Print result
               debug:
                 msg: "Ustawiono adres email {{ email }}"
               when: output_set_email_fact.success
               
-            - name: show result
+            - name: Print result
               debug:
                 msg: "Nie ustawiono adresu email!!!"
               when: not output_set_email_fact.success
