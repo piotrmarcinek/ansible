@@ -223,11 +223,20 @@
             - name: Set fact jobs id
               set_fact:
                 jobs_id_fact: "{{output_del_jobs.content | replace('no', 'job_id') | from_yaml }}"
-            
-            - name: Usuwam zadania!
-              debug:
-                msg: "{{ item['job_id'] }}"
+            - name: Run URL command - get jobs id
+              uri:
+                url: "http://{{inventory_hostname}}/sws/app/gnb/jobs/GetActiveJobs.jsp"
+                method: POST
+                return_content: yes
+                body_format: form-urlencoded
+                body:
+                  no: "{{ item['job_id'] }}"
+              register: output_del_jobs_status            
               with_items: "{{ jobs_id_fact['recordData'] }}"
+              
+            - name:
+              debug:
+                msg: "{{output_del_jobs_status}}"
                             
           when: jobs_del == "tak"         
       when: printer_model == 'Samsung SL-M3870FW'      
