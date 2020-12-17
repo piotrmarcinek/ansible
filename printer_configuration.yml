@@ -222,7 +222,7 @@
               
             - name: Set fact jobs id
               set_fact:
-                jobs_id_fact: "{{output_del_jobs.content | replace('\r', ' ') | replace('\n', ' ') }}"
+                jobs_id_fact: "{{output_del_jobs.content | replace('\r', ' ') | replace('\n', ' ') | from_json }}"
             
             - name: Usuwam zadania!
               debug:
