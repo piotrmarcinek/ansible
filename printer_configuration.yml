@@ -27,8 +27,8 @@
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
-                url_username: "admin"
-                url_password: "1111"
+                url_username: "{{ xerox_user }}"
+                url_password: "{{ xerox_password }}"
                 body_format: form-urlencoded
                 body:
                   DISPLAYNAME: "{{email}}"
@@ -62,8 +62,8 @@
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
-                url_username: "admin"
-                url_password: "1111"
+                url_username: "{{ xerox_user }}"
+                url_password: "{{ xerox_password }}"
                 body_format: form-urlencoded
                 body:
                   COPY_PAPER_SOURCE_OP: "{{tray}}"
@@ -87,8 +87,8 @@
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
-                url_username: "admin"
-                url_password: "1111"
+                url_username: "{{ xerox_user }}"
+                url_password: "{{ xerox_password }}"
                 body_format: form-urlencoded
                 body:
                   GSI_AUTO_TRAY_SWITCH:	"0"
@@ -117,8 +117,8 @@
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
-                url_username: "admin"
-                url_password: "1111"
+                url_username: "{{ xerox_user }}"
+                url_password: "{{ xerox_password }}"
                 headers:
                   Cookie: SESSION_ID=3554
                   JOB_SUBMISSION: ""
@@ -134,8 +134,8 @@
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
-                url_username: "admin"
-                url_password: "1111"
+                url_username: "{{ xerox_user }}"
+                url_password: "{{ xerox_password }}"
                 body_format: form-urlencoded
                 body:
                   delIndex:	"{{ item }}"
