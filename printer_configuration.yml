@@ -226,7 +226,7 @@
             
             - name: Usuwam zadania!
               debug:
-                msg: "{{ jobs_id_fact }}"
+                msg: "{{ jobs_id_fact['recordData'] }}"
                             
           when: jobs_del == "tak"         
       when: printer_model == 'Samsung SL-M3870FW'      
