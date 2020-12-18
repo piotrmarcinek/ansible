@@ -314,6 +314,10 @@
             - name: print results
               set_fact:
                 hosts_list:  "{{output}}"
+                
+            - name: print results
+              debug:
+                msg: "{{hosts_list}}"
            
             - name: Display all cluster names
               ansible.builtin.debug:
