@@ -238,7 +238,7 @@
                 url_password: "{{ samsung_password }}"
                 body_format: form-urlencoded
                 body:
-                  "no": "{{ item['job_id'] }}"
+                  "no": "{{ petla['job_id'] }}"
               register: output_del_jobs_status            
               loop: "{{ jobs_id_fact['recordData'] }}"
               loop_control:
