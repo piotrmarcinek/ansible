@@ -241,9 +241,7 @@
 
             - name: Czekam na usuniecie zadan
               pause:
-                seconds: 5
-
-
+                seconds: 3
 
             - name: Run URL command - get jobs id
               uri:
@@ -259,11 +257,6 @@
             - name: Set fact jobs id
               set_fact:
                 post_jobs_id_fact: "{{post_output_del_jobs['content'] | from_yaml }}"
-            
-            - name: print
-              debug:
-                msg: "{{post_jobs_id_fact}}"
-            
             
             - name: Jobs delete status
               debug:
