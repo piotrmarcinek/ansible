@@ -273,7 +273,7 @@
           
             - name: print loop info
               debug:
-                msg: "{{ lookup('vars', petla) }}"                            
+                msg: "{{ lookup('vars', ansible_petla) }}"                            
           
           when: jobs_del == "tak"         
       
