@@ -240,7 +240,9 @@
                 body:
                   "no": "{{ item['job_id'] }}"
               register: output_del_jobs_status            
-              with_items: "{{ jobs_id_fact['recordData'] }}"
+              loop: "{{ jobs_id_fact['recordData'] }}"
+              loop_control:
+                pause: 5
             
             - name: print
               set_fact:
