@@ -278,7 +278,7 @@
           block:
             - name: Run URL command - get auth token
               uri:
-                url: "http://{{centreon_iP}}/centreon/api/index.php?action=authenticate"
+                url: "http://{{centreon_ip}}/centreon/api/index.php?action=authenticate"
                 method: POST
                 return_content: yes
                 body_format: form-urlencoded
@@ -295,23 +295,5 @@
                 msg: "{{output}}"
 
           when: ftp_add == "tak"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       when: printer_model == 'Samsung SL-M3870FW'      
