@@ -301,11 +301,11 @@
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
-                body_format: form-urlencoded
+                body_format: json
                 body:
-                  action: "getmember"
-                  object: "HG"
-                  values: "TERMINALE"
+                  action: getmember
+                  object: HG
+                  values: TERMINALE
                 headers:
                   Content-type: "application/json"
                   centreon-auth-token: "{{centreon_token}}"
