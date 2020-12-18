@@ -217,7 +217,7 @@
                 body_format: form-urlencoded
                 body:
                   start: "0"
-                  limit: "10"
+                  limit: "100"
               register: output_del_jobs
                             
             - name: Set fact jobs id
@@ -251,6 +251,7 @@
                 body_format: form-urlencoded
                 body:
                   start: "0"
+                  limit: "100"
               register: post_output_del_jobs
                             
             - name: Set fact jobs id
