@@ -291,9 +291,29 @@
                   Accept: "text/plain"
               register: output
                             
-            - name: print output
+            - name: Set Centreon auth token
+              set_fact:
+                centreon_token: "{{output['json']['authToken']}}"
+                
+            - name: Run URL command - get terminals
+              uri:
+                url: "http://{{centreon_ip}}/centreon/api/index.php?action=action&object=centreon_clapi
+                method: POST
+                return_content: yes
+                force_basic_auth: yes
+                body_format: json
+                body:
+                  action: "getmember"
+                  object: "HG"
+                  values: "TERMINALE"
+                headers:
+                  Content-type: "application/json"
+                  centreon-auth-token: "{{centreon_token}}"
+              register: output                
+                
+            - name: print results
               debug:
-                msg: "{{output['json']['authToken']}}"
+                msg:  "{{output}}"
 
           when: ftp_add == "tak"
 
