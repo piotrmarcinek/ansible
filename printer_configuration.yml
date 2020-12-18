@@ -241,6 +241,8 @@
                   "no": "{{ item['job_id'] }}"
               register: output_del_jobs_status            
               loop: "{{ jobs_id_fact['recordData'] }}"
+              loop_control:
+                extended: yes
               when: jobs_id_fact['totalCount'] | int > 0
 
             - name: Run URL command - get jobs id
@@ -260,7 +262,17 @@
             
             - name: print
               debug:
-                msg: "{{jobs_id_fact}}"
+                msg: "Uruchom skrypt jeszcze raz - zostały zadania w kolejce"
+              when: jobs_id_fact['totalCount'] | int > 0
+              
+            - name: print
+              debug:
+                msg: "Nie ma zadan w kolejce"
+              when: jobs_id_fact['totalCount'] | int = 0
+            
+            - name: print loop info
+              debug:
+                msg: "{{ lookup('vars', ansible_loop_var) }}"
                             
           when: jobs_del == "tak"         
       
