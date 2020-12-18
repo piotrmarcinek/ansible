@@ -243,14 +243,24 @@
               loop: "{{ jobs_id_fact['recordData'] }}"
               when: jobs_id_fact['totalCount'] | int > 0
 
+            - name: Run URL command - get jobs id
+              uri:
+                url: "http://{{inventory_hostname}}/sws/app/gnb/jobs/GetActiveJobs.jsp"
+                method: POST
+                return_content: yes
+                body_format: form-urlencoded
+                body:
+                  start: "0"
+                  limit: "10"
+              register: output_del_jobs
+                            
+            - name: Set fact jobs id
+              set_fact:
+                jobs_id_fact: "{{output_del_jobs['content'] | from_yaml }}"
             
             - name: print
-              set_fact:
-                job_del_status: "{{ output_del_jobs_status.results }}"
-                
-            - name: print
               debug:
-                msg: "{{job_del_status[0]['content'] | regex_replace('{success:(.*)}', '\\1') }}"
+                msg: "{{jobs_id_fact}}"
                             
           when: jobs_del == "tak"         
       
