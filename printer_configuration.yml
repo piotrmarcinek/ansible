@@ -219,12 +219,16 @@
                   start: "0"
                   limit: "10"
               register: output_del_jobs
-              
+                            
             - name: Set fact jobs id
               set_fact:
                 jobs_id_fact: "{{output_del_jobs.content | replace('no', 'job_id') | from_yaml }}"        
             
-            - name: Run URL command - get jobs id
+            - name: print jobs
+              debug:
+                msg: "{{jobs_id_fact}}"
+            
+            - name: Run URL command - delete jobs id
               uri:
                 url: "http://{{inventory_hostname}}/sws/app/gnb/jobs/DeleteActiveJobs.jsp"
                 method: POST
