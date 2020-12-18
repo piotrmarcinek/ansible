@@ -271,10 +271,10 @@
                 msg: "Nie ma zadan w kolejce"
               when: jobs_id_fact['totalCount'] | int == 0
           
-            - name: print loop info 2
+            - name: print loop info
               debug:
-                msg: "{{ petla.index1 }}"
-                            
+                msg: "{{ lookup('vars', petla) }}"                            
+          
           when: jobs_del == "tak"         
       
       when: printer_model == 'Samsung SL-M3870FW'      
