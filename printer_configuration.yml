@@ -281,6 +281,7 @@
                 url: "http://{{centreon_ip}}/centreon/api/index.php?action=authenticate"
                 method: POST
                 return_content: yes
+                force_basic_auth: yes
                 body_format: form-urlencoded
                 body:
                   username: "{{centreon_user}}"
