@@ -237,9 +237,13 @@
                   "no": "{{ item['job_id'] }}"
               register: output_del_jobs_status            
               loop: "{{ jobs_id_fact['recordData'] }}"
-              loop_control:
-                pause: 3
               when: jobs_id_fact['totalCount'] | int > 0
+
+            - name: Pause for 5 minutes to build app cache
+              pause:
+                seconds: 10
+
+
 
             - name: Run URL command - get jobs id
               uri:
