@@ -241,7 +241,7 @@
 
             - name: Waiting for printer
               pause:
-                seconds: 1
+                seconds: 2
 
             - name: Run URL command - get jobs id
               uri:
