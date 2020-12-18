@@ -3,8 +3,8 @@
   connection: local
   gather_facts: no
   vars:
-    centreon_user: "apiadmin"
-    centreon_pass: "nq3KnfKr"
+    centreon_user: "ansible"
+    centreon_pass: "dsaf23rad21rtgdsr1edsa"
     centreon_ip: "10.17.11.10"
  
   tasks:
