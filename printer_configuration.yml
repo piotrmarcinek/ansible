@@ -239,9 +239,9 @@
               loop: "{{ jobs_id_fact['recordData'] }}"
               when: jobs_id_fact['totalCount'] | int > 0
 
-            - name: Czekam na usuniecie zadan
+            - name: Waiting for printer
               pause:
-                seconds: 3
+                seconds: 1
 
             - name: Run URL command - get jobs id
               uri:
