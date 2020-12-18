@@ -2,6 +2,10 @@
   hosts: "{{ branch_no }}-printer{{printer_no}}"
   connection: local
   gather_facts: no
+  vars:
+    centreon_user: "apiadmin"
+    centreon_pass: "nq3KnfKr"
+    centreon_ip: "10.17.11.10"
  
   tasks:
     - name: Discover printer model
@@ -269,5 +273,45 @@
               when: post_jobs_id_fact['totalCount'] | int == 0                   
           
           when: jobs_del == "tak"         
-      
+
+        - name: Add FTP terminals destinations
+          block:
+            - name: Run URL command - get auth token
+              uri:
+                url: "http://{{centreon_iP}}/centreon/api/index.php?action=authenticate"
+                method: POST
+                return_content: yes
+                body_format: form-urlencoded
+                body:
+                  username: "{{centreon_user}}"
+                  password: "{{centreon_pass}}"
+                headers:
+                  Content-type: "application/x-www-form-urlencoded"
+                  Accept: "text/plain"
+              register: output
+                            
+            - name: print output
+              debug:
+                msg: "{{output}}"
+
+          when: ftp_add == "tak"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       when: printer_model == 'Samsung SL-M3870FW'      
