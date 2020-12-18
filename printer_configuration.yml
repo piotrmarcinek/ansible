@@ -241,6 +241,7 @@
                   "no": "{{ item['job_id'] }}"
               register: output_del_jobs_status            
               loop: "{{ jobs_id_fact['recordData'] }}"
+              when: jobs_id_fact['totalCount'] | int > 0
 
             
             - name: print
