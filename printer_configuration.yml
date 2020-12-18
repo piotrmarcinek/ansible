@@ -227,10 +227,6 @@
             - name: print jobs
               debug:
                 msg: "{{jobs_id_fact}}"
-                
-            - name: print jobs lookup
-              debug:
-                msg: "{{lookup('jobs_id', jobs_id_fact)}}"
             
             - name: Run URL command - delete jobs id
               uri:
@@ -281,7 +277,7 @@
           
             - name: print loop info 2
               debug:
-                msg: "{{ lookup('vars', petla) }}"
+                msg: "{{ lookup('vars', ansible_petla) }}"
                             
           when: jobs_del == "tak"         
       
