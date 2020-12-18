@@ -243,6 +243,7 @@
               loop: "{{ jobs_id_fact['recordData'] }}"
               loop_control:
                 extended: yes
+                loop_var: "petla"
               when: jobs_id_fact['totalCount'] | int > 0
 
             - name: Run URL command - get jobs id
