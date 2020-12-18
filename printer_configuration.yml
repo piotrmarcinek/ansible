@@ -312,8 +312,13 @@
               register: output                
                 
             - name: print results
-              debug:
-                msg:  "{{output['json']}}"
+              set_fact:
+                hosts_list:  "{{output}}"
+           
+            - name: Display all cluster names
+              ansible.builtin.debug:
+                var: hosts_list
+              loop: "{{ json | community.general.json_query('result[?name=='0256*'].name') }}"
 
           when: ftp_add == "tak"
 
