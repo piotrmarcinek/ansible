@@ -301,7 +301,7 @@
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
-                body_format: json
+                body_format: form-urlencoded
                 body:
                   action: "getmember"
                   object: "HG"
