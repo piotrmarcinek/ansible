@@ -293,7 +293,7 @@
                             
             - name: print output
               debug:
-                msg: "{{output}}"
+                msg: "{{output['json']['authToken']}}"
 
           when: ftp_add == "tak"
 
