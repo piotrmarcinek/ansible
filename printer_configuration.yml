@@ -313,7 +313,7 @@
                 
             - name: print results
               debug:
-                msg:  "{{output}}"
+                msg:  "{{output['json']}}"
 
           when: ftp_add == "tak"
 
