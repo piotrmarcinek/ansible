@@ -256,10 +256,15 @@
             
             - name: print
               debug:
+                msg: "{{post_jobs_id_fact}}"
+            
+            
+            - name: Jobs delete status
+              debug:
                 msg: "Uruchom skrypt jeszcze raz - zostały zadania w kolejce"
               when: post_jobs_id_fact['totalCount'] | int > 0
               
-            - name: print
+            - name: Jobs delete status
               debug:
                 msg: "Nie ma zadan w kolejce"
               when: post_jobs_id_fact['totalCount'] | int == 0                   
