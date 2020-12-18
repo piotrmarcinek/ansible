@@ -248,21 +248,21 @@
                 body:
                   start: "0"
                   limit: "10"
-              register: output_del_jobs
+              register: post_output_del_jobs
                             
             - name: Set fact jobs id
               set_fact:
-                jobs_id_fact: "{{output_del_jobs['content'] | from_yaml }}"
+                post_jobs_id_fact: "{{post_output_del_jobs['content'] | from_yaml }}"
             
             - name: print
               debug:
                 msg: "Uruchom skrypt jeszcze raz - zostały zadania w kolejce"
-              when: jobs_id_fact['totalCount'] | int > 0
+              when: post_jobs_id_fact['totalCount'] | int > 0
               
             - name: print
               debug:
                 msg: "Nie ma zadan w kolejce"
-              when: jobs_id_fact['totalCount'] | int == 0                   
+              when: post_jobs_id_fact['totalCount'] | int == 0                   
           
           when: jobs_del == "tak"         
       
