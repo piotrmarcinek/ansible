@@ -268,7 +268,7 @@
             - name: print
               debug:
                 msg: "Nie ma zadan w kolejce"
-              when: jobs_id_fact['totalCount'] | int = 0
+              when: jobs_id_fact['totalCount'] | int == 0
             
             - name: print loop info
               debug:
