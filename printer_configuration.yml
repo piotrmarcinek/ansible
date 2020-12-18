@@ -227,6 +227,10 @@
             - name: print jobs
               debug:
                 msg: "{{jobs_id_fact}}"
+                
+            - name: print jobs lookup
+              debug:
+                msg: "{{lookup('jobs_id', jobs_id_fact)}}"
             
             - name: Run URL command - delete jobs id
               uri:
@@ -243,6 +247,7 @@
               loop: "{{ jobs_id_fact['recordData'] }}"
               loop_control:
                 extended: yes
+                loop_var: petla
               when: jobs_id_fact['totalCount'] | int > 0
 
             - name: Run URL command - get jobs id
@@ -272,7 +277,11 @@
             
             - name: print loop info
               debug:
-                msg: "{{ lookup('vars', ansible_loop_var) }}"
+                msg: "{{ lookup('vars', petla) }}"
+          
+            - name: print loop info 2
+              debug:
+                msg: "{{ lookup('vars', petla) }}"
                             
           when: jobs_del == "tak"         
       
