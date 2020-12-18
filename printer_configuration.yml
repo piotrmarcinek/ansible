@@ -307,7 +307,7 @@
                   object: HG
                   values: TERMINALE
                 headers:
-                  Content-type: "application/json"
+                  Content-type: application/json
                   centreon-auth-token: "{{centreon_token}}"
               register: output                
                 
