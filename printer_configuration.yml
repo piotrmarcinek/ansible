@@ -239,9 +239,9 @@
               loop: "{{ jobs_id_fact['recordData'] }}"
               when: jobs_id_fact['totalCount'] | int > 0
 
-            - name: Pause for 5 minutes to build app cache
+            - name: Czekam na usuniecie zadan
               pause:
-                seconds: 10
+                seconds: 5
 
 
 
