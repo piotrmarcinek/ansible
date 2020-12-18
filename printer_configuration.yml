@@ -297,17 +297,17 @@
                 
             - name: Run URL command - get terminals
               uri:
-                url: "http://{{centreon_ip}}/centreon/api/index.php?action=action&object=centreon_clapi
+                url: "http://{{centreon_ip}}/centreon/api/index.php?action=action&object=centreon_clapi"
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
                 body_format: json
                 body:
-                  action: getmember
-                  object: HG
-                  values: TERMINALE
+                  action: "getmember"
+                  object: "HG"
+                  values: "TERMINALE"
                 headers:
-                  Content-type: application/json
+                  Content-type: "application/json"
                   centreon-auth-token: "{{centreon_token}}"
               register: output                
                 
