@@ -3,9 +3,9 @@
   connection: local
   gather_facts: no
   vars:
-    centreon_user: "ansible"
-    centreon_pass: "dsaf23rad21rtgdsr1edsa"
-    centreon_ip: "10.17.11.10"
+    tower_user: "apiworker"
+    tower_pass: "test123"
+    tower_ip: "10.17.11.11"
  
   tasks:
     - name: Discover printer model
@@ -276,61 +276,27 @@
 
         - name: Add FTP terminals destinations
           block:
-            - name: Run URL command - get auth token
-              uri:
-                url: "http://{{centreon_ip}}/centreon/api/index.php?action=authenticate"
-                method: POST
-                return_content: yes
-                force_basic_auth: yes
-                body_format: form-urlencoded
-                body:
-                  username: "{{centreon_user}}"
-                  password: "{{centreon_pass}}"
-                headers:
-                  Content-type: "application/x-www-form-urlencoded"
-                  Accept: "text/plain"
-              register: output
-                            
-            - name: Set Centreon auth token
-              set_fact:
-                centreon_token: "{{output['json']['authToken']}}"
-                
             - name: Run URL command - get terminals
               uri:
-                url: "http://{{centreon_ip}}/centreon/api/index.php?action=action&object=centreon_clapi"
-                method: POST
-                return_content: yes
-                force_basic_auth: yes
-                body_format: json
-                body:
-                  action: "getmember"
-                  object: "HG"
-                  values: "TERMINALE"
-                headers:
-                  Content-type: "application/json"
-                  centreon-auth-token: "{{centreon_token}}"
-              register: output                
-                
-            - name: print results
-              set_fact:
-                hosts_list:  "{{output['json']['result'] | map(attribute='name') | flatten | map('regex_replace', '([0-9]{4})-.*(-t0[1-7])', '\\1\\2') | list }}"
-
-            - name: Run URL command - get terminals
-              uri:
-                url: "https://10.17.11.11/api/v2/hosts/?search={{branch_no}}-t"
+                url: "https://{{tower_ip}}/api/v2/hosts/?search={{branch_no}}-t"
                 method: GET
                 return_content: yes
                 force_basic_auth: yes
                 validate_certs: no
-                url_username: "apiworker"
-                url_password: "test123"
+                url_username: "{{tower_user}}"
+                url_password: "{{tower_pass}}"
                 headers:
                   Content-type: "application/json"
               register: output_tower
               
             - name: print debug
-              debug:
-                msg: "{{output_tower['json']['results'] | map(attribute='name') | flatten }}"
+              set_fact:
+                terminal_list: "{{output_tower['json']['results'] | map(attribute='name') | flatten }}"
+            
+            - name: IPv4 lookup for terminal list
+              ansible.builtin.debug:
+              msg: "{{ lookup('community.general.dig', '{{item}}')}}"
+              loop: "{{terminal_list}}"             
            
           when: ftp_add == "tak"
 
