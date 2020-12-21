@@ -296,7 +296,33 @@
             - name: IPv4 lookup for terminal list
               ansible.builtin.debug:
                 msg: "{{ lookup('community.general.dig', '{{item}}')}}"
-              loop: "{{terminal_list}}"             
+              loop: "{{terminal_list}}"
+              
+            - name: Run URL command 
+              uri:
+                url: "http://{{inventory_hostname}}/sws/app/addressbook/SetIndividualInABook.jsp"
+                method: POST
+                return_content: yes
+                body_format: form-urlencoded
+                body:
+                  cmd: add
+                  ispeedNo: "1"
+                  iname: "{{ item }}"
+                  favorite:	"0"
+                  ftp_added: "1"
+                  ftp_addr: "{{ lookup('community.general.dig', '{{item}}')}}"
+                  ftp_port: "21"
+                  ftp_anonymous: "1"
+                  ftp_sharedFolder: "write"
+                  ftp_folderDateFormat: "1"
+                  ftp_filingPolicy: "3"
+              register: output_set_ftp
+              loop: "{{terminal_list}}"
+              
+              
+            - name: print debug
+              debug:
+                msg: "{{output_set_ftp}}"
            
           when: ftp_add == "tak"
 
