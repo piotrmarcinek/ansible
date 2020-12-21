@@ -322,13 +322,9 @@
                   ftp_filePrefix: ""
                   ftp_password: ""
               register: output_set_ftp
-              loop: "{{terminal_list}}"
-              
-            - name: print debug
-              debug:
-                msg: "{{output_set_ftp}}"
-                
-            - name: Run URL command - get address
+              loop: "{{ terminal_list }}"
+                   
+            - name: Run URL command - get addresses
               uri:
                 url: "http://{{inventory_hostname}}/sws/app/addressbook/GetIndividualInABook.jsp"
                 method: POST
@@ -341,12 +337,21 @@
                   sort: "1"
                   start: "0"
                   limit: "30"
-              register: output_get_address    
+              register: output_get_addresses    
             
-            - name: print debug
+            - name: parse for configured ftp addresses
+              set_fact:
+                terminal_ftp_present: "{{ (output_get_addresses['content'] | from_yaml )['recordData'] | map(attribute='ftp') | flatten | map(attribute='addr') | flatten | select() | list  }}"
+                
+            
+            - name: create list
+              set_fact:
+                terminal_ftp_to_configure: "{{ terminal_ftp_to_configure + [ item ] }}"
+              loop: "{{ terminal_list }}"
+            
+            - name: print list
               debug:
-                msg: "{{ (output_get_address['content'] | from_yaml )['recordData'] | map(attribute='ftp') | flatten | map(attribute='addr') | flatten | select() | list  }}"
-           
+                msg: "{{ terminal_ftp_to_configure }}"
           when: ftp_add == "tak"
 
       when: printer_model == 'Samsung SL-M3870FW'      
