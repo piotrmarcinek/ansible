@@ -343,7 +343,10 @@
               set_fact:
                 terminal_ftp_present: "{{ (output_get_addresses['content'] | from_yaml )['recordData'] | map(attribute='ftp') | flatten | map(attribute='addr') | flatten | select() | list  }}"
                 
-            
+            - name: Initialize list
+              set_fact:
+                terminal_ftp_to_configure: []
+                
             - name: create list
               set_fact:
                 terminal_ftp_to_configure: "{{ terminal_ftp_to_configure + [ item ] }}"
@@ -352,6 +355,7 @@
             - name: print list
               debug:
                 msg: "{{ terminal_ftp_to_configure }}"
+                
           when: ftp_add == "tak"
 
       when: printer_model == 'Samsung SL-M3870FW'      
