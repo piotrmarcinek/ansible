@@ -335,19 +335,10 @@
             - name: Parse output
               set_fact:
                 speed_no: "{{ (output_get_speed_no.content | from_yaml).usedSpeedNo.split(',')[-1] | int + 1  }}"
-             
-            - name: print umbers
-              debug:
-                msg: "Dlugosc {{terminal_ftp_to_configure | length}} ilosc pozycji {{ speed_no | int }}"
-                
+                             
             - name: Generate speed no
               set_fact:
-                numbers: "{{ range(speed_no | int, (terminal_ftp_to_configure | length) + (speed_no | int) ) | list }}"
-            
-            - name: Print numbers
-              debug:
-                msg: "{{ numbers }}"
-             
+                speed_no_to_set: "{{ range(speed_no | int, (terminal_ftp_to_configure | length) + (speed_no | int) ) | list }}"
                                          
             - name: Run URL command 
               uri:
@@ -357,12 +348,12 @@
                 body_format: form-urlencoded
                 body:
                   cmd: add
-                  ispeedNo: "3"
-                  iname: "stanowisko0{{ item[-1] }}"
+                  ispeedNo: "{{ item.1 }}"
+                  iname: "stanowisko0{{ item.0[-1] }}"
                   favorite:	"0"
                   smb_added: "0"
                   ftp_added: "1"
-                  ftp_addr: "{{ lookup('community.general.dig', '{{item}}')}}"
+                  ftp_addr: "{{ lookup('community.general.dig', '{{ item.0 }}')}}"
                   ftp_port: "21"
                   ftp_anonymous: "1"
                   ftp_sharedFolder: "write"
@@ -373,9 +364,11 @@
                   ftp_filePrefix: ""
                   ftp_password: ""
               register: output_set_ftp
-              loop: "{{ terminal_list }}"
-                
-                
+              loop: "{{ terminal_ftp_to_configure | zip(speed_no_to_set) | list }}"
+            
+            - name:
+              debug:
+                msg: "{{output_set_ftp}}"
                 
           when: ftp_add == "tak"
 
