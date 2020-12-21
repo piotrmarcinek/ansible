@@ -324,7 +324,7 @@
                 validate_certs: no
                 url_username: "apiworker"
                 url_password: "test123"
-                body_format: form_urlencoded
+                body_format: form-urlencoded
                 body:
                   search: "0007-t01"
                 headers:
