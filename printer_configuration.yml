@@ -317,6 +317,10 @@
                   ftp_sharedFolder: "write"
                   ftp_folderDateFormat: "1"
                   ftp_filingPolicy: "3"
+                  ftp_id: ""
+                  ftp_folderPolicy: ""
+                  ftp_filePrefix: ""
+                  ftp_password: ""
               register: output_set_ftp
               loop: "{{terminal_list}}"
               
