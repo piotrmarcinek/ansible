@@ -369,7 +369,7 @@
             - name:
               debug:
                 msg: "{{ item['content'] }}"
-              loop: "{{ output_set_ftp['results'] | regex_replace('success:', '') }}"   
+              loop: "{{ output_set_ftp['results'] }}"   
           when: ftp_add == "tak"
 
       when: printer_model == 'Samsung SL-M3870FW'      
