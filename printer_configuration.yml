@@ -321,9 +321,8 @@
             - name: print list
               debug:
                 msg: "{{ terminal_ftp_to_configure }}"
-                - name: Get speed no 
             
-            - name: Get spped number
+            - name: Get speed number
               uri:
                 url: "http://{{inventory_hostname}}/sws/app/addressbook/GetUsedSpeedNoInABook.jsp"
                 method: POST
