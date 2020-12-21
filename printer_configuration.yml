@@ -345,7 +345,7 @@
             
             - name: print debug
               debug:
-                msg: "{{ (output_get_address['content'] | from_yaml )['recordData'] }}"
+                msg: "{{ (output_get_address['content'] | from_yaml )['recordData'] | map(attribute='ftp') | flatten | map(attribute='addr') | flatten }}"
            
           when: ftp_add == "tak"
 
