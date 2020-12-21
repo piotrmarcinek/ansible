@@ -306,7 +306,7 @@
                 body_format: form-urlencoded
                 body:
                   cmd: add
-                  ispeedNo: "1"
+                  ispeedNo: "3"
                   iname: "stanowisko0{{ item[-1] }}"
                   favorite:	"0"
                   smb_added: "0"
