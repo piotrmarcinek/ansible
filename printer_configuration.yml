@@ -338,11 +338,11 @@
         
             - name: Parse output
               set_fact:
-                output_get_speed_no_fact: "{{ output_get_speed_no.content | from_yaml }}"
+                output_get_speed_no_fact: "{{ (output_get_speed_no.content | from_yaml).usedSpeedNo.split(',')[-1] | int + 1  }}"
             
             - name: Print result
               debug:
-                msg: "{{ output_get_speed_no_fact.usedSpeedNo.split(',')[-1] | int + 1 }}"
+                msg: "{{ output_get_speed_no_fact }}"
                                     
             - name: Run URL command 
               uri:
