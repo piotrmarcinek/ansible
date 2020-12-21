@@ -326,7 +326,7 @@
                 url_password: "test123"
                 body_format: form-urlencoded
                 body:
-                  ?search: "{{branch_no}}-t"
+                  ?search: "0007-t"
                 headers:
                   Content-type: "application/json"
               register: output_tower
