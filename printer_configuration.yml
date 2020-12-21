@@ -333,7 +333,7 @@
               
             - name: print debug
               debug:
-                msg: "{{output_tower['json']['results'] | map(attribute="name")}}"
+                msg: "{{output_tower['json']['results'] | map(attribute='name') | flatten }}"
            
           when: ftp_add == "tak"
 
