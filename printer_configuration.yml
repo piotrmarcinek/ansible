@@ -351,7 +351,7 @@
               set_fact:
                 terminal_ftp_to_configure: "{{ terminal_ftp_to_configure + [ item ] }}"
               loop: "{{ terminal_list }}"
-              when: lookup('community.general.dig', '{{item}}') not in terminal_list
+              when: lookup('community.general.dig', 'item') not in terminal_list
               
             - name: print list
               debug:
