@@ -335,6 +335,10 @@
             - name: Parse output
               set_fact:
                 speed_no: "{{ (output_get_speed_no.content | from_yaml).usedSpeedNo.split(',')[-1] | int + 1  }}"
+             
+            - name: print umbers
+              debug:
+                msg: "Dlugosc {{terminal_ftp_to_configure | length}} ilosc pozycji {{ speed_no | int }}"
                 
             - name: Generate speed no
               set_fact:
