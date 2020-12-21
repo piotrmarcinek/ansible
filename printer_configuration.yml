@@ -307,7 +307,7 @@
                 body:
                   cmd: add
                   ispeedNo: "1"
-                  iname: "stanowisko0"+"({{ item }})[-1]"
+                  iname: "stanowisko0+({{ item }})[-1]"
                   favorite:	"0"
                   smb_added: "0"
                   ftp_added: "1"
