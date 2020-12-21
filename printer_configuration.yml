@@ -338,7 +338,7 @@
                 
             - name: Generate speed no
               set_fact:
-                numbers: "{{ range(speed_no | int, terminal_ftp_to_configure + speed_no - 1) | list }}"
+                numbers: "{{ range(speed_no | int, terminal_ftp_to_configure | length + speed_no | int - 1) | list }}"
             
             - name: Print numbers
               debug:
