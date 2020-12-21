@@ -339,10 +339,8 @@
             - name: Print result
               debug:
                 msg: "{{ output_get_speed_no_fact.usedSpeedNo  }}"
-                
-                
-                              
-           - name: Run URL command 
+                                    
+            - name: Run URL command 
               uri:
                 url: "http://{{inventory_hostname}}/sws/app/addressbook/SetIndividualInABook.jsp"
                 method: POST
