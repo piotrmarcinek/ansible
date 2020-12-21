@@ -313,7 +313,7 @@
                 
             - name: print results
               set_fact:
-                hosts_list:  "{{output['json']['result'] | map(attribute='name') | flatten}}"
+                hosts_list:  "{{output['json']['result'] | map(attribute='name') | flatten | regex_replace('([0-9]{4})-.*(-t0[1-7])', '\\1\\2')}}"
                 
             - name: print results
               debug:
