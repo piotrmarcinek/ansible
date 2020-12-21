@@ -368,9 +368,9 @@
             
             - name:
               debug:
-                msg: "{{ Ustwiono poprawnie }}"
+                msg: "{{Status ustawienia adresu FTP dla : item }}"
               loop: "{{ output_set_ftp['results'] }}"
-              when: "{{ (item['content'] | replace(':', ': ') | from_yaml)['success'] }}" == 'true'
+    
           
           when: ftp_add == "tak"
 
