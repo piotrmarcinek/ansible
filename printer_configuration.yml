@@ -317,7 +317,7 @@
                 
             - name: print results
               debug:
-                msg: "{{hosts_list }}"
+                msg: "{{hosts_list | map(attribute='id') | flatten}}"
            
           when: ftp_add == "tak"
 
