@@ -364,7 +364,7 @@
             
             - name:
               debug:
-                msg: "{{ item['item'] }}"
+                msg: "Status ustawienia adresu FTP dla {{ item['item'][0] }}: {{ (item['content'] | replace(':', ': ') | from_yaml)['success'] }}"
               loop: "{{ output_set_ftp['results'] }}"
     
           
