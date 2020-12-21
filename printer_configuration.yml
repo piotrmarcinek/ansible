@@ -288,42 +288,7 @@
                 headers:
                   Content-type: "application/json"
               register: output_tower
-              
-            - name: print debug
-              set_fact:
-                terminal_list: "{{output_tower['json']['results'] | map(attribute='name') | flatten }}"
-            
-            - name: IPv4 lookup for terminal list
-              ansible.builtin.debug:
-                msg: "{{ lookup('community.general.dig', '{{item}}')}}"
-              loop: "{{terminal_list}}"
-              
-            - name: Run URL command 
-              uri:
-                url: "http://{{inventory_hostname}}/sws/app/addressbook/SetIndividualInABook.jsp"
-                method: POST
-                return_content: yes
-                body_format: form-urlencoded
-                body:
-                  cmd: add
-                  ispeedNo: "3"
-                  iname: "stanowisko0{{ item[-1] }}"
-                  favorite:	"0"
-                  smb_added: "0"
-                  ftp_added: "1"
-                  ftp_addr: "{{ lookup('community.general.dig', '{{item}}')}}"
-                  ftp_port: "21"
-                  ftp_anonymous: "1"
-                  ftp_sharedFolder: "write"
-                  ftp_folderDateFormat: "1"
-                  ftp_filingPolicy: "3"
-                  ftp_id: ""
-                  ftp_folderPolicy: ""
-                  ftp_filePrefix: ""
-                  ftp_password: ""
-              register: output_set_ftp
-              loop: "{{ terminal_list }}"
-                   
+                                         
             - name: Run URL command - get addresses
               uri:
                 url: "http://{{inventory_hostname}}/sws/app/addressbook/GetIndividualInABook.jsp"
@@ -356,6 +321,55 @@
             - name: print list
               debug:
                 msg: "{{ terminal_ftp_to_configure }}"
+                - name: Get speed no 
+            
+            - name: Get spped number
+              uri:
+                url: "http://{{inventory_hostname}}/sws/app/addressbook/GetUsedSpeedNoInABook.jsp"
+                method: POST
+                return_content: yes
+                body_format: form-urlencoded
+                body:
+                  type: "0"
+              register: output_get_speed_no
+        
+            - name: Parse output
+              set_fact:
+                output_get_speed_no_fact: "{{ output_get_speed_no.content | from_yaml }}"
+            
+            - name: Print result
+              debug:
+                msg: "{{ output_get_speed_no_fact.usedSpeedNo  }}"
+                
+                
+                              
+           - name: Run URL command 
+              uri:
+                url: "http://{{inventory_hostname}}/sws/app/addressbook/SetIndividualInABook.jsp"
+                method: POST
+                return_content: yes
+                body_format: form-urlencoded
+                body:
+                  cmd: add
+                  ispeedNo: "3"
+                  iname: "stanowisko0{{ item[-1] }}"
+                  favorite:	"0"
+                  smb_added: "0"
+                  ftp_added: "1"
+                  ftp_addr: "{{ lookup('community.general.dig', '{{item}}')}}"
+                  ftp_port: "21"
+                  ftp_anonymous: "1"
+                  ftp_sharedFolder: "write"
+                  ftp_folderDateFormat: "1"
+                  ftp_filingPolicy: "3"
+                  ftp_id: ""
+                  ftp_folderPolicy: ""
+                  ftp_filePrefix: ""
+                  ftp_password: ""
+              register: output_set_ftp
+              loop: "{{ terminal_list }}"
+                
+                
                 
           when: ftp_add == "tak"
 
