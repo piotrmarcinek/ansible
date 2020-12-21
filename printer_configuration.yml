@@ -304,7 +304,7 @@
                   limit: "30"
               register: output_get_addresses    
             
-            - name: parse for configured ftp addresses
+            - name: Parse for configured ftp addresses
               set_fact:
                 terminal_ftp_present: "{{ (output_get_addresses['content'] | from_yaml )['recordData'] | map(attribute='ftp') | flatten | map(attribute='addr') | flatten | select() | list  }}"
                 
@@ -312,7 +312,7 @@
               set_fact:
                 terminal_ftp_to_configure: []
                 
-            - name: create list
+            - name: Create list
               set_fact:
                 terminal_ftp_to_configure: "{{ terminal_ftp_to_configure + [ item ] }}"
               loop: "{{ terminal_list }}"
@@ -332,11 +332,11 @@
               set_fact:
                 speed_no: "{{ (output_get_speed_no.content | from_yaml).usedSpeedNo.split(',')[-1] | int + 1  }}"
                              
-            - name: Generate speed no
+            - name: Generate speed numbers
               set_fact:
                 speed_no_to_set: "{{ range(speed_no | int, (terminal_ftp_to_configure | length) + (speed_no | int) ) | list }}"
                                          
-            - name: Run URL command 
+            - name: Run URL command - set FTP destinations
               uri:
                 url: "http://{{inventory_hostname}}/sws/app/addressbook/SetIndividualInABook.jsp"
                 method: POST
@@ -362,7 +362,7 @@
               register: output_set_ftp
               loop: "{{ terminal_ftp_to_configure | zip(speed_no_to_set) | list }}"
             
-            - name:
+            - name: Print status
               debug:
                 msg: "Status ustawienia adresu FTP dla {{ item['item'][0] }}: {{ (item['content'] | replace(':', ': ') | from_yaml)['success'] }}"
               loop: "{{ output_set_ftp['results'] }}"
