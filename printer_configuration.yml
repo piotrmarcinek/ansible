@@ -338,7 +338,7 @@
                 
             - name: Generate speed no
               set_fact:
-                numbers: "{{ range(speed_no | int, 10 + 1) | list }}"
+                numbers: "{{ range(speed_no | int, 10 ) | list }}"
             
             - name: Print numbers
               debug:
