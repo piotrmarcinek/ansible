@@ -291,7 +291,7 @@
               
             - name:
               debug:
-                msg: "{{output_tower}}"
+                msg: "{{ output_tower['json']['result'] | map(attribute='name') | flatten }}"
                                          
             - name: Run URL command - get addresses
               uri:
