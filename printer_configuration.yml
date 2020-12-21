@@ -313,11 +313,11 @@
                 
             - name: print results
               set_fact:
-                hosts_list:  "{{output['json']['result']}}"
+                hosts_list:  "{{output['json']['result'] | map(attribute='name') | flatten}}"
                 
             - name: print results
               debug:
-                msg: "{{hosts_list | map(attribute='id') | flatten}}"
+                msg: "{{hosts_list }}"
            
           when: ftp_add == "tak"
 
