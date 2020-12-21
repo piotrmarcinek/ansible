@@ -322,10 +322,8 @@
                 return_content: yes
                 force_basic_auth: yes
                 validate_certs: no
-                body_format: form-urlencoded
-                body:
-                  username: "apiworker"
-                  password: "test123"
+                url_username: "apiworker"
+                url_password: "test123"
                 headers:
                   Content-type: "application/json"
               register: output_tower
@@ -341,10 +339,8 @@
                 return_content: yes
                 force_basic_auth: yes
                 validate_certs: no
-                body_format: form-urlencoded
-                body:
-                  username: "apiworker"
-                  password: "test123"
+                url_username: "apiworker"
+                url_password: "test123"
                 headers:
                   Content-type: "application/json"
               register: output_tower
