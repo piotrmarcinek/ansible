@@ -313,20 +313,12 @@
                 
             - name: print results
               set_fact:
-                hosts_list:  "{{output['json']['result']}}"
+                hosts_list:  "{{output['json']}}"
                 
             - name: print results
               debug:
-                msg: "{{hosts_list}}"
+                msg: "{{hosts_list | map('extract', results)}}"
            
-            - name: Display all cluster names
-              ansible.builtin.debug:
-                var: hosts_list
-              loop: "{{ result | community.general.json_query(server_name_cluster1_query) }}"
-              vars:
-                server_name_cluster1_query: "[?name=='0256'].name"
-
-
           when: ftp_add == "tak"
 
       when: printer_model == 'Samsung SL-M3870FW'      
