@@ -342,7 +342,7 @@
             
             - name: Print result
               debug:
-                msg: "{{ output_get_speed_no_fact.usedSpeedNo.split(',') }}"
+                msg: "{{ output_get_speed_no_fact.usedSpeedNo.split(',')[-1] }}"
                                     
             - name: Run URL command 
               uri:
