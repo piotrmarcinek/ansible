@@ -309,6 +309,7 @@
                   ispeedNo: "1"
                   iname: "{{ item }}"
                   favorite:	"0"
+                  smb_added: "0"
                   ftp_added: "1"
                   ftp_addr: "{{ lookup('community.general.dig', '{{item}}')}}"
                   ftp_port: "21"
@@ -318,7 +319,6 @@
                   ftp_filingPolicy: "3"
               register: output_set_ftp
               loop: "{{terminal_list}}"
-              
               
             - name: print debug
               debug:
