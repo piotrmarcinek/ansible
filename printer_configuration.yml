@@ -335,6 +335,15 @@
             - name: Parse output
               set_fact:
                 speed_no: "{{ (output_get_speed_no.content | from_yaml).usedSpeedNo.split(',')[-1] | int + 1  }}"
+                
+            - name: Generate speed no
+              set_fact:
+                numbers: "{{ range(speed_no, 10 + 1) | list }}"
+            
+            - name: Print numbers
+              debug:
+                msg: "{{ numbers }}"
+             
                                          
             - name: Run URL command 
               uri:
