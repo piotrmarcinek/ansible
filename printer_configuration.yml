@@ -342,7 +342,7 @@
             
             - name: Print result
               debug:
-                msg: "{{ output_get_speed_no_fact.usedSpeedNo  }}"
+                msg: "{{ output_get_speed_no_fact.usedSpeedNo | list }}"
                                     
             - name: Run URL command 
               uri:
