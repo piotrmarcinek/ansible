@@ -290,8 +290,8 @@
               register: output_tower
               
             - name:
-              debug:
-                msg: "{{ output_tower['json']['results'] | map(attribute='name') | flatten }}"
+              set_fact:
+                terminal_list: "{{ output_tower['json']['results'] | map(attribute='name') | flatten }}"
                                          
             - name: Run URL command - get addresses
               uri:
