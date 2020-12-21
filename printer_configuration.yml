@@ -314,7 +314,26 @@
             - name: print results
               set_fact:
                 hosts_list:  "{{output['json']['result'] | map(attribute='name') | flatten | map('regex_replace', '([0-9]{4})-.*(-t0[1-7])', '\\1\\2') | list }}"
-            
+
+            - name: Run URL command - get terminals
+              uri:
+                url: "https://10.17.11.11/api/login"
+                method: POST
+                return_content: yes
+                force_basic_auth: yes
+                validate_certs: no
+                body_format: form-urlencoded
+                body:
+                  username: "apiworker"
+                  password: "test123"
+                headers:
+                  Content-type: "application/json"
+              register: output_tower
+              
+            - name: print debug
+              debug:
+                msg: "{{output_tower}}"
+
             - name: Run URL command - get terminals
               uri:
                 url: "https://10.17.11.11/api/v2/inventories"
@@ -322,7 +341,7 @@
                 return_content: yes
                 force_basic_auth: yes
                 validate_certs: no
-                body_format: json
+                body_format: form-urlencoded
                 body:
                   username: "apiworker"
                   password: "test123"
