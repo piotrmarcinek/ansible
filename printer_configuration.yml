@@ -315,9 +315,6 @@
               set_fact:
                 hosts_list:  "{{output['json']['result'] | map(attribute='name') | flatten | map('regex_replace', '([0-9]{4})-.*(-t0[1-7])', '\\1\\2') | list }}"
                 
-            - name: print results
-              debug:
-                msg: "{{hosts_list }}"
            
           when: ftp_add == "tak"
 
