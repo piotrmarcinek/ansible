@@ -345,7 +345,7 @@
             
             - name: print debug
               debug:
-                msg: "{{output_get_address}}"                   
+                msg: "{{output_get_address['content']['recordData']}}"                   
            
           when: ftp_add == "tak"
 
