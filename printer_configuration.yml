@@ -321,6 +321,7 @@
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
+                validate_certs: no
                 body_format: json
                 body:
                   username: "apiworker"
