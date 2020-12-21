@@ -317,11 +317,7 @@
                 terminal_ftp_to_configure: "{{ terminal_ftp_to_configure + [ item ] }}"
               loop: "{{ terminal_list }}"
               when: lookup('community.general.dig', item) not in terminal_ftp_present
-              
-            - name: print list
-              debug:
-                msg: "{{ terminal_ftp_to_configure }}"
-            
+                       
             - name: Get speed number
               uri:
                 url: "http://{{inventory_hostname}}/sws/app/addressbook/GetUsedSpeedNoInABook.jsp"
@@ -368,7 +364,7 @@
             
             - name:
               debug:
-                msg: "Status ustawienia adresu FTP dla :{{ item }}"
+                msg: "{{ item }}"
               loop: "{{ output_set_ftp['results'] }}"
     
           
