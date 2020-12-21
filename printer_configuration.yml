@@ -313,7 +313,7 @@
                 
             - name: print results
               set_fact:
-                hosts_list:  "{{output['json']['result'] | map(attribute='name') | flatten}}"
+                hosts_list:  "{{output['json']['result'] | map(attribute='name') }}"
                 
             - name: print results
               debug:
