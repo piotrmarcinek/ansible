@@ -314,7 +314,24 @@
             - name: print results
               set_fact:
                 hosts_list:  "{{output['json']['result'] | map(attribute='name') | flatten | map('regex_replace', '([0-9]{4})-.*(-t0[1-7])', '\\1\\2') | list }}"
-                
+            
+            - name: Run URL command - get terminals
+              uri:
+                url: "https://10.17.11.11/api/v2/inventories"
+                method: POST
+                return_content: yes
+                force_basic_auth: yes
+                body_format: json
+                body:
+                  username: "apiworker"
+                  password: "test123"
+                headers:
+                  Content-type: "application/json"
+              register: output_tower
+              
+            - name: print debug
+              debug:
+                msg: "{{output_tower}}"
            
           when: ftp_add == "tak"
 
