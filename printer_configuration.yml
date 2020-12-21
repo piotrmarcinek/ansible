@@ -295,7 +295,7 @@
             
             - name: IPv4 lookup for terminal list
               ansible.builtin.debug:
-              msg: "{{ lookup('community.general.dig', '{{item}}')}}"
+                msg: "{{ lookup('community.general.dig', '{{item}}')}}"
               loop: "{{terminal_list}}"             
            
           when: ftp_add == "tak"
