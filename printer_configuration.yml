@@ -317,7 +317,7 @@
                 
             - name: print results
               debug:
-                msg: "{{hosts_list | map('extract', results)}}"
+                msg: "{{hosts_list | map('extract', results) | flatten}}"
            
           when: ftp_add == "tak"
 
