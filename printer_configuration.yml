@@ -368,7 +368,7 @@
             
             - name:
               debug:
-                msg: "{{ item['content'] | from_json }}"
+                msg: "{{ item['content'] | from_yaml }}"
               loop: "{{ output_set_ftp['results'] }}"   
           when: ftp_add == "tak"
 
