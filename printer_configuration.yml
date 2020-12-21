@@ -288,6 +288,10 @@
                 headers:
                   Content-type: "application/json"
               register: output_tower
+              
+            - name:
+              debug:
+                msg: "{{output_tower}}"
                                          
             - name: Run URL command - get addresses
               uri:
