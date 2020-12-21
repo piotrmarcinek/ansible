@@ -317,15 +317,13 @@
 
             - name: Run URL command - get terminals
               uri:
-                url: "https://10.17.11.11/api/login"
+                url: "https://10.17.11.11/api/"
                 method: POST
                 return_content: yes
                 force_basic_auth: yes
                 validate_certs: no
                 url_username: "apiworker"
                 url_password: "test123"
-                headers:
-                  Content-type: "application/json"
               register: output_tower
               
             - name: print debug
