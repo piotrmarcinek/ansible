@@ -317,13 +317,16 @@
 
             - name: Run URL command - get terminals
               uri:
-                url: "https://10.17.11.11/api/v2/inventories"
+                url: "https://10.17.11.11/api/v2/hosts"
                 method: GET
                 return_content: yes
                 force_basic_auth: yes
                 validate_certs: no
                 url_username: "apiworker"
                 url_password: "test123"
+                body_format: form_urlencoded
+                body:
+                  search: "0007-t01"
                 headers:
                   Content-type: "application/json"
               register: output_tower
