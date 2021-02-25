@@ -1,6 +1,0 @@
-- name: Hello World Sample
-  hosts: 0256-t04
-  tasks:
-    - name: Hello Message
-      debug:
-        msg: "Hello World!"
